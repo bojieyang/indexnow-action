@@ -24,4 +24,4 @@ jobs:
         with:
           sitemap-location: "https://bojieyang.github.io/sitemap.xml"
           since: 10
-          indexnow-key: "FEAK_KEY_TEST"
+          key: "FEAK_KEY_TEST"
