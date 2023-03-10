@@ -21,7 +21,7 @@ const statusCodeMap = new Map([
   [202, {response: "Accepted", reason: "URL received. IndexNow key validation pending."}],
   [400, {response: "Bad request", reason: "Invalid format."}],
   [403, {response: "Forbidden", reason: "In case of key not valid (e.g. key not found, file found but key not in the file)."}],
-  [422, {response: "Unprocessable Entity", reason: "In case of URLs which don’t belong to the host or the key is not matching the schema in the protocol."}],
+  [422, {response: "Unprocessable Entity", reason: "In case of URLs which don't belong to the host or the key is not matching the schema in the protocol."}],
   [429, {response: "Too Many Requests", reason: "Too Many Requests (potential Spam)."}]
 ]);
   
@@ -36,7 +36,7 @@ async function run() {
     let sitemap = new Sitemapper({
       url: options.sitemapLocation,
       lastmod: calculateWith(options.since, options.sinceUnit),
-      timeout: options.timeout
+      timeout: options.timeout,
     });
     try {
       const { sites } = await sitemap.fetch();
@@ -45,7 +45,7 @@ async function run() {
         core.info("There is no matching urls to be submited.");
         return;
       } 
-      core.info(`Start submit urls: ${sites}  ...`);
+      core.info(`Start submit urls: ${sites} .`);
 
       try {
         const {statusCode} = await submit(options, sites);
@@ -61,9 +61,6 @@ async function run() {
       core.setFailed(error.message);
     }
     
-
-
-    core.setOutput('time', new Date().toTimeString());
   } catch (error) {
     core.setFailed(error.message);
   }
@@ -71,7 +68,7 @@ async function run() {
 
 function handleResponse(statusCode, options) {
   if(statusCode === 200 || statusCode === 202) {
-    core.log("🎉 URLs submitted successfully."); 
+    core.log(`🎉 URLs submitted successfully. statusCode: ${statusCode}`); 
     return;
   } 
 
@@ -98,10 +95,10 @@ function initOptions(options = {}) {
   options.host = host;
   options.sitemapLocation = sitemapLocation;
   options.since = getIntegerInput('since');
-  options.unit = getSinceUnit();
+  options.sinceUnit = getSinceUnit();
   options.limit = getLimit();
-  options.indexnowKey = core.getInput('indexnow-key', {required:true});
-  options.indexnowKeyLocation = core.getInput('indexnow-key-location');
+  options.key = core.getInput('key', {required:true});
+  options.keyLocation = core.getInput('key-location');
   options.endpoint = getEndpoint();
   options.timeout = getIntegerInput('timeout');
   options.failureStrategy = getFailureStrategy();
@@ -109,7 +106,7 @@ function initOptions(options = {}) {
 }
 
 function logOptions(options){
-  core.info(`options: ${options}`);
+  core.info(`options: ${JSON.stringify(options)} .`);
 
 }
 
@@ -181,41 +178,43 @@ function calculateWith(past, unit) {
 async function submit(options, urls) {
   const submitEndpoint = "https://" + options.endpoint +"/indexnow";
   const content = submitContent(options, urls);
-
+  
   if(core.isDebug())  {
     core.debug(`submit endpoint: ${submitEndpoint}`);
     core.debug(`post data: ${content}`);
   }
+    const {statusCode} = await got.post(submitEndpoint, {
+      json: content,
+      timeout: {
+        request: options.timeout
+      },
+      retry: {
+        limit: 0
+      },
+      throwHttpErrors: false
+    });
 
-  const {body, statusCode} = await got.post(submitEndpoint, {
-    json: content,
-    timeout: {
-      request: options.timeout
-    },
-    retry: {
-      limit: 0
+    if (core.isDebug()) {
+      core.debug(`statusCode: ${statusCode}`);
     }
-  });
 
-  if (core.isDebug()) {
-    core.debug(`statusCode: ${statusCode}, body: ${body}`);
-  }
-  return {statusCode};
-}
+    return {statusCode};
+  } 
+  
 
 function submitContent(options, urls) {
   const data = {};
   data.host = options.host;
-  data.key = options.indexnowKey;
-  if(options.indexnowKeyLocation) {
-    data.keyLocation = options.indexnowKeyLocation;
+  data.key = options.key;
+  if(options.keyLocation) {
+    data.keyLocation = options.keyLocation;
   }
   if(urls.length > options.limit) {
     data.urlList = urls.slice(0, options.limit);
   } else {
     data.urlList = urls;
   }
-  return data;
+return data;
 }
 
 

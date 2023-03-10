@@ -64,16 +64,17 @@ test('console.log the sites', async () => {
 
 });
 */
+
 // shows how the runner will run a javascript action with env / stdout protocol
 
 test('test runs', () => {
-  process.env['INPUT_SITEMAP_LOCATION'] = "https://bojieyang.github.io/sitemap.xml";
-  process.env['INPUT_SINCE'] = '1';
+  process.env['INPUT_SITEMAP-LOCATION'] = "https://bojieyang.github.io/sitemap.xml";
+  process.env['INPUT_SINCE'] = '100';
   process.env['INPUT_SINCE-UNIT'] = 'day';
   process.env['INPUT_ENDPOINT'] = 'www.bing.com';
-  process.env['INPUT_INDEXNOW-KEY'] = 'test';
+  process.env['INPUT_KEY'] = 'test';
   process.env['INPUT_LIMIT'] = '100';
-  process.env['INPUT_TIMEOUT'] = '10000';
+  process.env['INPUT_TIMEOUT'] = '100000';
   process.env['INPUT_FAILURE-STRATEGY'] = 'ignore';
   
   const ip = path.join(__dirname, 'index.js');
