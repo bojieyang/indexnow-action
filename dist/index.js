@@ -184,29 +184,29 @@ function calculateWith(past, unit) {
 async function submit(options, urls) {
   const submitEndpoint = "https://" + options.endpoint +"/indexnow";
   const content = submitContent(options, urls);
-
+  
   if(core.isDebug())  {
     core.debug(`submit endpoint: ${submitEndpoint}`);
     core.debug(`post data: ${content}`);
   }
+    const {statusCode} = await got.post(submitEndpoint, {
+      json: content,
+      timeout: {
+        request: options.timeout
+      },
+      retry: {
+        limit: 0
+      },
+      throwHttpErrors: false
+    });
 
-  const data = await got.post(submitEndpoint, {
-    json: content,
-    timeout: {
-      request: options.timeout
-    },
-    retry: {
-      limit: 0
+    if (core.isDebug()) {
+      core.debug(`statusCode: ${statusCode}`);
     }
-  });
-  if (core.isDebug()) {
-    core.debug(`data: ${JSON.stringify(data)}`);
-  }
 
-  core.info(`data: ${JSON.stringify(data)}`);
-  console.log("data:", JSON.stringify(data));
-  return {statusCode: data};
-}
+    return {statusCode};
+  } 
+  
 
 function submitContent(options, urls) {
   const data = {};
