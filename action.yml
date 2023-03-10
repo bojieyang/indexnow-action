@@ -1,13 +1,64 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
+name: "IndexNow"
+description: "Automatically submit URLs through the IndexNow protocol."
+author: "Bojie Yang"
+branding:
+  icon: settings
+  color: red
 inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
+  sitemap-location: # location of the the sitemap
+    description: "The location of the sitemap(e.g., https://bojieyang.github.io/sitemap.xml)."
     required: true
-    default: '1000'
-outputs:
-  time: # output will be available to future steps
-    description: 'The current time after waiting'
+    default: ""
+  since:
+    description: |
+      The lastmod field in the sitemap that since past {n} {unit} will be submit. 
+      The default value is 1.
+    required: false
+    default: "1"
+  since-unit:
+    description: |
+      The unit of since. 
+      Available units are 'minute', 'hour', 'day', 'week', 'month' and 'year'.
+      The default value is 'day'.
+    required: false
+    default: "day"
+  endpoint:
+    description: |
+      The endpoint of a special search engine. 
+      Available units are api.indexnow.org, www.bing.com, search.seznam.cz and yandex.com. 
+      The default value is www.bing.com. For more details, see: https://www.indexnow.org/faq
+    required: false
+    default: "www.bing.com"
+  indexnow-key:
+    description: |
+      IndexNow key that you get from search engines.
+      NOTICE: DO NOT stored as plaintext in the workflow file. Use GitHub Secrets instead.
+      More about GitHub Secrets, see 'https://docs.github.com/en/actions/security-guides/encrypted-secrets'.
+    required: true
+  indexnow-key-location:
+    description: |
+      Location of the IndexNow key file that you customed.
+      If not set, it will assume that there is a file named '{your-indexnow-key}.text' in the root directory of the website.
+      NOTICE: DO NOT stored as plaintext in the workflow file. Use GitHub Secrets instead.
+      More about GitHub Secrets, see 'https://docs.github.com/en/actions/security-guides/encrypted-secrets'.
+    required: false
+    default: ""
+  limit:
+    description: "The upper limit for submitting URLs."
+    required: false
+    default: "100"
+  timeout:
+    description: "Set the fetch timeout in milliseconds. The default value is 10000."
+    required: false
+    default: "10000"
+  failure-strategy: #
+    description: |
+      Define the strategy  when submit failed. Available strategy are ignore and error. 
+      For 'ignore', will outputting an notice only. 
+      For 'error', outputting an error message also sets the status of action to fail. 
+      The Default value is ignore.
+    required: false
+    default: "ignore"
 runs:
-  using: 'node16'
-  main: 'dist/index.js'
+  using: "node16"
+  main: "dist/index.js"
