@@ -77,11 +77,10 @@ test('test runs', () => {
   process.env['INPUT_TIMEOUT'] = '100000';
   process.env['INPUT_FAILURE-STRATEGY'] = 'ignore';
   
-  const ip = path.join(__dirname, 'index.js');
-  console.log(`ip: ${ip}`);
-  try {
-    
-    const result = cp.execSync(`node ${ip}`, {env: process.env}).toString();
+  const cmd = 'node';
+  const args = [path.join(__dirname, 'index.js')];
+  try {    
+    const result = cp.execFileSync(cmd, args, {env: process.env}).toString();
     console.log(result);
   } catch(error) {
     console.log(error.stdout.toString());
