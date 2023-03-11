@@ -79,6 +79,13 @@ test('test runs', () => {
   
   const ip = path.join(__dirname, 'index.js');
   console.log(`ip: ${ip}`);
-  const result = cp.execSync(`node ${ip}`, {env: process.env}).toString();
-  console.log(result);
+  try {
+    
+    const result = cp.execSync(`node ${ip}`, {env: process.env}).toString();
+    console.log(result);
+  } catch(error) {
+    console.log(error.stdout.toString());
+    throw error;
+  }
+  
 })
