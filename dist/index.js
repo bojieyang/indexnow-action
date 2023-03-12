@@ -100,7 +100,7 @@ async function prepareForSubmit(options) {
 }
 function handleResponse(statusCode, options) {
   if(statusCode === 200) {
-    core.info(`🎉 ${styles.bgGreen.open}URLs submitted successfully.${styles.bgGreen.close}`); 
+    core.info(`🎉 URLs submitted successfully.`); 
     return;
   } 
 
