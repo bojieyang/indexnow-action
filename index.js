@@ -1,7 +1,8 @@
 const core = require('@actions/core');
 const Sitemapper = require('sitemapper');
-const dayjs = require('dayjs');
+
 const got = require('got');
+const {verify, calculateWith} = require('./utils');
 
 const INDEXNOW_UPPER_LIMIT = 10000;
 
@@ -24,60 +25,89 @@ const statusCodeMap = new Map([
   [422, {response: "Unprocessable Entity", reason: "In case of URLs which don't belong to the host or the key is not matching the schema in the protocol."}],
   [429, {response: "Too Many Requests", reason: "Too Many Requests (potential Spam)."}]
 ]);
-  
 
-// most @actions toolkit packages have async methods
+
+/**
+ * entry function
+ */
 async function run() {
+    const {ok, options} = handleInputs();
+    
+    if(!ok) {
+      return;
+    }
+
+    let prepared = await prepareForSubmit(options);
+    
+    if(!prepared.ok) {
+      return;
+    }
+
+    submit(options, prepared.urls);
+}
+
+async function submit(options, urls) {
   try {
-    let options = initOptions(); 
-    logOptions(options);
-    core.info(`Start fetch ${options.sitemapLocation}  ...`);
+    core.startGroup('submit urls');
+    logUrlsWithMessage(urls, 'Start submitting urls are as follows:');
+    const {statusCode} = await doSubmit(options, urls);
+    handleResponse(statusCode, options);
+  } catch(error) {
+    handleFailure(error.message, options);
+  } finally {
+    core.endGroup();
+  }
+}
+
+async function prepareForSubmit(options) {
+  try {
+    core.startGroup('prepare for submit');
+    core.info(`Start fetching sitemap from ${options.sitemapLocation}`);
 
     let sitemap = new Sitemapper({
       url: options.sitemapLocation,
       lastmod: calculateWith(options.since, options.sinceUnit),
       timeout: options.timeout,
     });
-    try {
-      const { sites } = await sitemap.fetch();
+
+    let { sites: urls } = await sitemap.fetch();
       
-      if(sites.length === 0 ) {
-        core.info("There is no matching urls to be submited.");
-        return;
-      } 
-      core.info(`Start submit urls: ${sites} .`);
-
-      try {
-        const {statusCode} = await submit(options, sites);
-        handleResponse(statusCode, options);
-
-      } catch(error) {
-        handleResponse(error.message, options);
-      }
-
-
-    } catch (error) {
-      core.error(error.message);
-      core.setFailed(error.message);
+    if(urls.length === 0 ) {
+      core.info("No candidate urls found.");
+    } 
+    if(urls.length > options.limit) {
+      core.notice('The number of candidate urls exceeds the upper limit, will be truncated. The Number of candidate links is ${sites.length}. The limit set in inputs is ${options.limit}.');
+      urls = urls.slice(0, options.limit);
     }
-    
-  } catch (error) {
-    core.setFailed(error.message);
+    if(urls.length > 0) {
+      logUrlsWithMessage(urls, 'Candidate submittable urls are as follows:')
+    }
+    return {ok: true, urls: urls};
+  } catch(error) {
+    handleFailure(error.message, options.failureStrategy);
+    return {ok: false, urls:[]}
+  } finally {
+    core.endGroup();
   }
 }
-
 function handleResponse(statusCode, options) {
-  if(statusCode === 200 || statusCode === 202) {
-    core.log(`🎉 URLs submitted successfully. statusCode: ${statusCode}`); 
+  if(statusCode === 200) {
+    core.info(`🎉 URLs submitted successfully.`); 
     return;
   } 
 
+  if (statusCode === 202) {
+    const item = statusCodeMap.get(statusCode);
+    core.info(`⏳ URLs submitted ${item.response}. ${item.reason}`);
+    return;
+  }
+
   const item  = statusCodeMap.get(statusCode);
-  let message = "submit failed.";
+  let message = "💔 SUBMIT FAILED";
   if(item === undefined) {
-    message  = `statusCode: ${statusCode} is not defined in IndexNow protocol.`;
+    message  = `${message}. statusCode: ${statusCode} is not defined in IndexNow protocol.`;
   } else {
-    message = `statusCode: ${statusCode}, response: ${item.response}, reason: ${item.reason}`;
+    message = `${message}. statusCode: ${statusCode}, response: ${item.response}, reason: ${item.reason}`;
   } 
   handleFailure(message, options.failureStrategy);
 }
@@ -90,6 +120,21 @@ function handleFailure( message, failureStrategy) {
     core.setFailed(message);
   }
 }
+
+function handleInputs() {
+  try {
+    core.startGroup('handle inputs');
+    const options= initOptions();
+    setSecrets(options);
+    logOptions(options);
+    return {ok: true, options: options};
+  } catch(error) {
+    core.setFailed(error);
+    return {ok: false, options: undefined};
+  } finally {
+    core.endGroup();
+  }
+}
 function initOptions(options = {}) {
   const {host, sitemapLocation} = getSitemapLocation();
   options.host = host;
@@ -98,34 +143,60 @@ function initOptions(options = {}) {
   options.sinceUnit = getSinceUnit();
   options.limit = getLimit();
   options.key = core.getInput('key', {required:true});
-  options.keyLocation = core.getInput('key-location');
+  options.keyLocation = getKeyLocation();
   options.endpoint = getEndpoint();
   options.timeout = getIntegerInput('timeout');
   options.failureStrategy = getFailureStrategy();
+  core.info('Parse inputs succeeded.');
   return options;
 }
 
-function logOptions(options){
-  core.info(`options: ${JSON.stringify(options)} .`);
-
-}
-
-function getSitemapLocation() {
-  const sitemapInput = core.getInput('sitemap-location', {required: true});
-  try {
-    const url = new URL(sitemapInput);
-    if(url.protocol === 'http:' || url.protocol === 'https:'){
-      return {
-        host: url.host,
-        sitemapLocation: sitemapInput
-      };
-    } else {
-      throw new Error(`sitemap-location with value ${sitemapInput} is invalid format.`);
-    }
-  } catch(error) {
-    throw new Error(`sitemap-location with value ${sitemapInput} is invalid format.`);
+function setSecrets(options) {
+  core.setSecret(options.key);
+  if(options.keyLocation) {
+    core.setSecret(options.keyLocation);
   }
 }
+
+function logOptions(options){
+  core.startGroup('show options');
+  Object.keys(options).forEach(element => core.info(`${element}: ${options['${element}']}`));
+  core.endGroup();
+ 
+}
+function logUrlsWithMessage(urls, message) {
+  core.info(`${message}`)
+  core.info('[')
+  urls.forEach(url => core.info(` ${url}`));
+  core.info(']');
+}
+function getSitemapLocation() {
+  const sitemapInput = core.getInput('sitemap-location', {required: true});
+    const {ok, url} = verify(sitemapInput);
+    if(ok) {
+      return {
+        host: url.host,
+        sitemapLocation: url.href
+      };
+    }
+    throw new Error(`sitemap-location with value ${sitemapInput} is invalid format.`);
+}
+
+function getKeyLocation() {
+  const keyLocation = core.getInput('key-location');
+  // Omit the verification process when the value is empty.
+  if(!keyLocation) {
+    return keyLocation;
+  }
+
+  const {ok} = verify(keyLocation);
+  if(ok) {
+    return keyLocation;
+  }
+  throw new Error(`key-location with value ${keyLocation} is invalid format.`);
+}
+
+
 
 function getIntegerInput(inputName) {
   const input = core.getInput(inputName);
@@ -171,11 +242,9 @@ function getFailureStrategy() {
   return strategy;
 }
 
-function calculateWith(past, unit) {
-  return dayjs().subtract(past, unit).valueOf();
-}
 
-async function submit(options, urls) {
+
+async function doSubmit(options, urls) {
   const submitEndpoint = "https://" + options.endpoint +"/indexnow";
   const content = submitContent(options, urls);
   
@@ -209,15 +278,11 @@ function submitContent(options, urls) {
   if(options.keyLocation) {
     data.keyLocation = options.keyLocation;
   }
-  if(urls.length > options.limit) {
-    data.urlList = urls.slice(0, options.limit);
-  } else {
-    data.urlList = urls;
-  }
-return data;
+  data.urlList = urls;
+  return data;
 }
 
 
 run();
 
-module.exports =  { run, calculateWith, submit };
+module.exports =  { run, getIntegerInput, submit };

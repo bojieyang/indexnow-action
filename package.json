@@ -1,32 +1,33 @@
 {
-  "name": "indexnow",
+  "name": "indexnow-action",
   "version": "0.1.0",
   "description": "Automatically submit URLs through the IndexNow protocol.",
   "main": "index.js",
   "engines": {
-      "node": ">=18.0"
+      "node": ">=16.0"
     },
   "scripts": {
     "lint": "eslint .",
     "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
     "test": "jest",
+    "test:ci": "jest utils" , 
     "all": "npm run lint && npm run prepare && npm run test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/actions/javascript-action.git"
+    "url": "git+https://github.com/bojieyang/indexnow-action.git"
   },
   "keywords": [
     "GitHub",
     "Actions",
     "IndexNow"
   ],
-  "author": "",
+  "author": "Bojie Yang",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bojieyang/IndexNow/issues"
+    "url": "https://github.com/bojieyang/indexnow-action/issues"
   },
-  "homepage": "https://github.com/bojieyang/IndexNow",
+  "homepage": "https://github.com/bojieyang/indexnow-action#readme",
   "dependencies": {
     "@actions/core": "^1.10.0",
     "dayjs": "^1.11.7",
