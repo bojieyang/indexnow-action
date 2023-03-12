@@ -1,7 +1,9 @@
 const core = require('@actions/core');
 const Sitemapper = require('sitemapper');
-
 const got = require('got');
+const styles = require('ansi-styles');
+
+
 const {verify, calculateWith} = require('./utils');
 
 const INDEXNOW_UPPER_LIMIT = 10000;
@@ -48,7 +50,7 @@ async function run() {
 
 async function submit(options, urls) {
   try {
-    core.startGroup('submit urls');
+    core.startGroup('Submit urls and show result');
     logUrlsWithMessage(urls, 'Start submitting urls are as follows:');
     const {statusCode} = await doSubmit(options, urls);
     handleResponse(statusCode, options);
@@ -92,7 +94,7 @@ async function prepareForSubmit(options) {
 }
 function handleResponse(statusCode, options) {
   if(statusCode === 200) {
-    core.info(`🎉 URLs submitted successfully.`); 
+    core.info(`🎉 ${styles.bgGreen.open}URLs submitted successfully.${styles.bgGreen.close}`); 
     return;
   } 
 
@@ -103,7 +105,7 @@ function handleResponse(statusCode, options) {
   }
 
   const item  = statusCodeMap.get(statusCode);
-  let message = "💔 SUBMIT FAILED";
+  let message = `💔 ${styles.red.open}${styles.bold.open}SUBMIT FAILED${styles.bold.close}${styles.red.close}`;
   if(item === undefined) {
     message  = `${message}. statusCode: ${statusCode} is not defined in IndexNow protocol.`;
   } else {
@@ -156,16 +158,15 @@ function setSecrets(options) {
   if(options.keyLocation) {
     core.setSecret(options.keyLocation);
   }
+  core.info("Ensure secrets masked in logs successfully.");
 }
 
 function logOptions(options){
-  core.startGroup('show options');
+  core.info('show options below:');
   Object.keys(options).forEach(element => {
     const val = options[element];
     core.info(`${element}: ${val}`)
-  } );
-  core.endGroup();
- 
+  } ); 
 }
 function logUrlsWithMessage(urls, message) {
   core.info(`${message}`)
