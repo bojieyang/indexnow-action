@@ -160,7 +160,10 @@ function setSecrets(options) {
 
 function logOptions(options){
   core.startGroup('show options');
-  Object.keys(options).forEach(element => core.info(`${element}: ${options['${element}']}`));
+  Object.keys(options).forEach(element => {
+    const val = options[element];
+    core.info(`${element}: ${val}`)
+  } );
   core.endGroup();
  
 }
