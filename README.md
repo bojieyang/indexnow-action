@@ -12,7 +12,7 @@ A GitHub Action that automatically submits URLs to participating search engines 
   <a href="README.zh.md">中文版本</a>
 </p>
  -->
- 
+
 ## Usage
 
 ### **Prerequisites**
@@ -28,11 +28,13 @@ steps:
   # v1 is the latest major version following the action-versioning guide.
   - uses: bojieyang/indexnow-action@v1
     with:
-      sitemap-location: "https://example.com/sitemap.xml" # your sitemap location, must start with http(s).
-      key: ${{ secrets.INDEXNOW_KEY }} # The key you get from IndexNow.
+      # your sitemap location, must start with http(s).
+      sitemap-location: "https://example.com/sitemap.xml"
+      # The key you get from IndexNow.
+      key: ${{ secrets.INDEXNOW_KEY }}
 ```
 
-#### Examples
+### **Examples**
 
 A complete example used in my blog shows below:
 
