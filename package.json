@@ -33,7 +33,7 @@
     "ansi-styles": "^5.2.0",
     "dayjs": "^1.11.7",
     "sitemapper": "^3.2.6",
-    "got": "^11.8.6"
+    "got": "^12.6.0"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.36.1",
