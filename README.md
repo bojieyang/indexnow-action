@@ -12,6 +12,7 @@ A GitHub Action that automatically submits URLs to participating search engines 
   <a href="README.zh.md">中文版本</a>
 </p>
  -->
+ 
 ## Usage
 
 ### **Prerequisites**
