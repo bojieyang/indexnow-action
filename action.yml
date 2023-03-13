@@ -6,9 +6,8 @@ branding:
   color: red
 inputs:
   sitemap-location: # location of the the sitemap
-    description: "The location of the sitemap(e.g., https://bojieyang.github.io/sitemap.xml)."
+    description: "The location of the sitemap(e.g., https://example.com/sitemap.xml)."
     required: true
-    default: ""
   since:
     description: |
       The lastmod field in the sitemap that since past {n} {unit} will be submit. 
@@ -38,7 +37,7 @@ inputs:
   key-location:
     description: |
       Location of the IndexNow key file that you customed.
-      If not set, it will assume that there is a file named '{your-indexnow-key}.text' in the root directory of the website.
+      If not set, it will assume that there is a file named '{your-indexnow-key}.txt' in the root directory of the website.
       NOTICE: DO NOT stored as plaintext in the workflow file. Use GitHub Secrets instead.
       More about GitHub Secrets, see 'https://docs.github.com/en/actions/security-guides/encrypted-secrets'.
     required: false
