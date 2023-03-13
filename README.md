@@ -25,13 +25,10 @@ If you don't know how to get the key file, see [IndexNow Document](https://www.i
 
 ```yaml
 steps:
-  # v1 is the latest major version following the action-versioning guide.
-  - uses: bojieyang/indexnow-action@v1
+  - uses: bojieyang/indexnow-action@v1 # v1 is the latest major version following the action-versioning.
     with:
-      # your sitemap location, must start with http(s).
-      sitemap-location: "https://example.com/sitemap.xml"
-      # The key you get from IndexNow.
-      key: ${{ secrets.INDEXNOW_KEY }}
+      sitemap-location: "https://example.com/sitemap.xml" # your sitemap location, must start with http(s).
+      key: ${{ secrets.INDEXNOW_KEY }} # The key you get from IndexNow.
 ```
 
 ### **Examples**
@@ -81,7 +78,7 @@ View code from [here](https://github.com/bojieyang/bojieyang.github.io/blob/mast
 
 - since
   `optional`.
-  The `lastmod` field in the sitemap that for past {n} {since-unit} will be submit. The default value is 1.
+  URLs with `lastmod` fields in sitemap files within the last {since} {since-unit} will be submitted. The default value is 1.
 
 - since-unit
   `optional`.
@@ -108,11 +105,13 @@ View code from [here](https://github.com/bojieyang/bojieyang.github.io/blob/mast
 
 ## Maintainers
 
-[@bojeyang](https://github.com/bojieyang)
+[@bojieyang](https://github.com/bojieyang)
 
 ## Acknowledgements
 
 Use [@seantomburke/sitemapper](https://github.com/seantomburke/sitemapper) to fetch and parse sitemap.
+
+Use [@iamkun/dayjs](https://github.com/iamkun/dayjs) to simplify date-related calculations.
 
 ## Contributing
 

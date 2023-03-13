@@ -10,7 +10,7 @@ inputs:
     required: true
   since:
     description: |
-      The lastmod field in the sitemap that since past {n} {unit} will be submit. 
+      URLs with `lastmod` fields in sitemap files within the last {since} {since-unit} will be submitted.
       The default value is 1.
     required: false
     default: "1"
