@@ -1,4 +1,4 @@
-name: "IndexNow"
+name: "IndexNow Action"
 description: "Automatically submit URLs through the IndexNow protocol."
 author: "Bojie Yang"
 branding:
