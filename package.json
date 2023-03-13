@@ -30,7 +30,7 @@
   "homepage": "https://github.com/bojieyang/indexnow-action#readme",
   "dependencies": {
     "@actions/core": "^1.10.0",
-    "ansi-styles": "^5.2.0",
+    "ansi-styles": "^6.2.1",
     "dayjs": "^1.11.7",
     "sitemapper": "^3.2.6",
     "got": "^11.8.6"
