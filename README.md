@@ -1,5 +1,8 @@
 <h1 align="center">IndexNow Action</h1>
 <p align="center">
+<a href="https://github.com/bojieyang/indexnow-action/actions/workflows/basic-validation.yml">
+  <img alt="Basic validation" src="https://github.com/bojieyang/indexnow-action/actions/workflows/basic-validation.yml/badge.svg">
+</a>
 <img alt="GitHub Workflow Status (with branch)" src="https://img.shields.io/github/actions/workflow/status/bojieyang/indexnow-action/test.yml?branch=main">
   <img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/bojieyang/indexnow-action">
 <img alt="GitHub" src="https://img.shields.io/github/license/bojieyang/indexnow-action">
@@ -26,7 +29,7 @@ If you don't know how to get the key file, see [IndexNow Document](https://www.i
 steps:
   - uses: bojieyang/indexnow-action@v1 # v1 is the latest major version following the action-versioning.
     with:
-      sitemap-location: "https://example.com/sitemap.xml" # your sitemap location, must start with http(s).
+      sitemap-location: 'https://example.com/sitemap.xml' # your sitemap location, must start with http(s).
       key: ${{ secrets.INDEXNOW_KEY }} # The key you get from IndexNow.
 ```
 
@@ -35,11 +38,11 @@ steps:
 A complete example used in my blog shows below:
 
 ```yaml
-name: "IndexNow"
+name: 'IndexNow'
 on:
   schedule:
     # Set the schedule time
-    - cron: "0 2 * * *"
+    - cron: '0 2 * * *'
 
 jobs:
   check-and-submit:
@@ -48,7 +51,7 @@ jobs:
       - name: indexnow-action
         uses: bojieyang/indexnow-action@v1
         with:
-          sitemap-location: "https://bojieyang.github.io/sitemap.xml"
+          sitemap-location: 'https://bojieyang.github.io/sitemap.xml'
           key: ${{ secrets.INDEXNOW_KEY }}
 ```
 
