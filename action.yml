@@ -1,33 +1,33 @@
-name: "IndexNow Action"
-description: "Automatically submit URLs through the IndexNow protocol."
-author: "Bojie Yang"
+name: 'IndexNow Action'
+description: 'Automatically submit URLs through the IndexNow protocol.'
+author: 'Bojie Yang'
 branding:
   icon: settings
   color: red
 inputs:
   sitemap-location: # location of the the sitemap
-    description: "The location of the sitemap(e.g., https://example.com/sitemap.xml)."
+    description: 'The location of the sitemap(e.g., https://example.com/sitemap.xml).'
     required: true
   since:
     description: |
       URLs with `lastmod` fields in sitemap files within the last {since} {since-unit} will be submitted.
       The default value is 1.
     required: false
-    default: "1"
+    default: '1'
   since-unit:
     description: |
       The unit of since. 
       Available units are 'minute', 'hour', 'day', 'week', 'month' and 'year'.
       The default value is 'day'.
     required: false
-    default: "day"
+    default: 'day'
   endpoint:
     description: |
       The endpoint of a special search engine. 
       Available units are api.indexnow.org, www.bing.com, search.seznam.cz and yandex.com. 
       The default value is www.bing.com. For more details, see: https://www.indexnow.org/faq
     required: false
-    default: "www.bing.com"
+    default: 'www.bing.com'
   key:
     description: |
       IndexNow key that you get from search engines.
@@ -41,15 +41,15 @@ inputs:
       NOTICE: DO NOT stored as plaintext in the workflow file. Use GitHub Secrets instead.
       More about GitHub Secrets, see 'https://docs.github.com/en/actions/security-guides/encrypted-secrets'.
     required: false
-    default: ""
+    default: ''
   limit:
-    description: "The upper limit for submitting URLs."
+    description: 'The upper limit for submitting URLs.'
     required: false
-    default: "100"
+    default: '100'
   timeout:
-    description: "Set the fetch timeout in milliseconds. The default value is 10000."
+    description: 'Set the fetch timeout in milliseconds. The default value is 10000.'
     required: false
-    default: "10000"
+    default: '10000'
   failure-strategy: #
     description: |
       Define the strategy  when submit failed. Available strategy are ignore and error. 
@@ -57,7 +57,7 @@ inputs:
       For 'error', outputting an error message also sets the status of action to fail. 
       The Default value is ignore.
     required: false
-    default: "ignore"
+    default: 'ignore'
 runs:
-  using: "node16"
-  main: "dist/index.js"
+  using: 'node16'
+  main: 'dist/index.js'

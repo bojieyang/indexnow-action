@@ -7,11 +7,14 @@
     "node": ">=16.0"
   },
   "scripts": {
-    "lint": "eslint .",
-    "prepare": "ncc build index.js -o dist --source-map --license licenses.txt",
-    "test": "jest",
+    "lint": "eslint --config ./.eslintrc.json ./*.js",
+    "lint:fix": "eslint --config ./.eslintrc.json ./*.js --fix",
+    "format": "prettier --no-error-on-unmatched-pattern --config ./.prettierrc.js --write ./*.{js,ts,yml,yaml}",
+    "format-check": "prettier --no-error-on-unmatched-pattern --config ./.prettierrc.js --check ./*.{js,ts,yml,yaml}",
+    "build": "ncc build index.js -o dist --source-map --license licenses.txt",
+    "test": "jest --coverage",
     "test:ci": "jest utils",
-    "all": "npm run lint && npm run prepare && npm run test"
+    "pre-checkin": "npm run format && npm run lint:fix && npm run build && npm test"
   },
   "repository": {
     "type": "git",
@@ -32,12 +35,13 @@
     "@actions/core": "^1.10.0",
     "ansi-styles": "^5.2.0",
     "dayjs": "^1.11.7",
-    "sitemapper": "^3.2.6",
-    "got": "^11.8.6"
+    "got": "^11.8.6",
+    "sitemapper": "^3.2.6"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.36.1",
     "eslint": "^8.36.0",
-    "jest": "^29.5.0"
+    "jest": "^29.5.0",
+    "prettier": "^2.8.4"
   }
 }
