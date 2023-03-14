@@ -7,11 +7,10 @@
 <p align="center">
 A GitHub Action that automatically submits URLs to participating search engines through the IndexNow protocol.
 </p>
-<!--
+
 <p align="center">
   <a href="README.zh.md">中文版本</a>
 </p>
- -->
 
 ## Usage
 
@@ -86,8 +85,7 @@ View code from [here](https://github.com/bojieyang/bojieyang.github.io/blob/mast
 
 - endpoint
   `optional`.
-
-  The endpoint of a special search engine. Available units are `api.indexnow.org`, `www.bing.com`, `search.seznam.cz` and `yandex.com`. For more details, see: [IndexNow FAQ](https://www.indexnow.org/faq). The default value is www.bing.com.
+  The endpoint of a special search engine. Available values are `api.indexnow.org`, `www.bing.com`, `search.seznam.cz` and `yandex.com`. For more details, see: [IndexNow FAQ](https://www.indexnow.org/faq). The default value is www.bing.com.
 
 - limit
   `optional`.
@@ -99,9 +97,9 @@ View code from [here](https://github.com/bojieyang/bojieyang.github.io/blob/mast
 
 - failure-strategy
   `optional`
-  Define the strategy when submit failed. Available strategy are `ignore` and `error`.
+  Define the strategy when submit failed. Available strategies are `ignore` and `error`.
   For `ignore`, will outputting an notice only.
-  For `error`, outputting an error message also sets the status of action to fail. The Default value is `ignore`.
+  For `error`, outputting an error message also sets the status of action to fail. The default value is `ignore`.
 
 ## Maintainers
 
