@@ -9,8 +9,8 @@
   "scripts": {
     "lint": "eslint --config ./.eslintrc.json ./*.js",
     "lint:fix": "eslint --config ./.eslintrc.json ./*.js --fix",
-    "format": "prettier --no-error-on-unmatched-pattern --config ./.prettierrc.js --write ./*.{js,ts,yml,yaml}",
-    "format-check": "prettier --no-error-on-unmatched-pattern --config ./.prettierrc.js --check ./*.{js,ts,yml,yaml}",
+    "format": "prettier --no-error-on-unmatched-pattern --config ./.prettierrc.js --write './*.{js,ts,yml,yaml}'",
+    "format-check": "prettier --no-error-on-unmatched-pattern --config ./.prettierrc.js --check './*.{js,ts,yml,yaml}'",
     "build": "ncc build index.js -o dist --source-map --license licenses.txt",
     "test": "jest --coverage",
     "test:ci": "jest utils",
