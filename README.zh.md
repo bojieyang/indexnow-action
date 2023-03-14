@@ -9,7 +9,6 @@
 </p>
 <p align="center">
 根据你设定的规则，通过 IndexNow 协议自动提交 URLs 的工具。
-A GitHub Action that automatically submits URLs to participating search engines through the IndexNow protocol.
 </p>
 
 <p align="center">
