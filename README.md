@@ -1,4 +1,4 @@
-<h1 align="center">indexnow-action</h1>
+<h1 align="center">IndexNow Action</h1>
 <p align="center">
 <img alt="GitHub Workflow Status (with branch)" src="https://img.shields.io/github/actions/workflow/status/bojieyang/indexnow-action/test.yml?branch=main">
   <img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/bojieyang/indexnow-action">
