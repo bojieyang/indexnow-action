@@ -70,11 +70,9 @@ async function run() {
 
   let prepared = await prepareForSubmit(options);
 
-  if (!prepared.ok) {
-    return;
+  if (prepared.ok && prepared.urls.length > 0) {
+    submit(options, prepared.urls);
   }
-
-  submit(options, prepared.urls);
 }
 
 async function submit(options, urls) {
