@@ -88,7 +88,7 @@ View code from [here](https://github.com/bojieyang/bojieyang.github.io/blob/mast
 
 - endpoint
   `optional`.
-  The endpoint of a special search engine. Available values are `api.indexnow.org`, `www.bing.com`, `search.seznam.cz` and `yandex.com`. For more details, see: [IndexNow FAQ](https://www.indexnow.org/faq). The default value is www.bing.com.
+  The endpoint of a special search engine. Available values are `api.indexnow.org`, `www.bing.com`, `search.seznam.cz` and `yandex.com`. For more details, see: [IndexNow FAQ](https://www.indexnow.org/faq). The default value is `www.bing.com`.
 
 - limit
   `optional`.
@@ -99,7 +99,7 @@ View code from [here](https://github.com/bojieyang/bojieyang.github.io/blob/mast
   The timeout both fetch sitemap and submit to the search engine in milliseconds. The default value is 10000 (10 seconds).
 
 - failure-strategy
-  `optional`
+  `optional`.
   Define the strategy when submit failed. Available strategies are `ignore` and `error`.
   For `ignore`, will outputting an notice only.
   For `error`, outputting an error message also sets the status of action to fail. The default value is `ignore`.
