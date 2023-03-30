@@ -8623,6 +8623,82 @@ module.exports.implForWrapper = function (wrapper) {
 
 /***/ }),
 
+/***/ 4498:
+/***/ ((__unused_webpack_module, exports) => {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+class AbstractSitemapHandler {
+    sitemapProcessor;
+    constructor(processor) {
+        if (processor) {
+            this.sitemapProcessor = processor;
+        }
+    }
+}
+exports["default"] = AbstractSitemapHandler;
+
+
+/***/ }),
+
+/***/ 2444:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const sitemap_indictor_1 = __nccwpck_require__(8725);
+const utils_1 = __nccwpck_require__(1314);
+const abstract_sitemap_handler_1 = __importDefault(__nccwpck_require__(4498));
+const dayjs_1 = __importDefault(__nccwpck_require__(7401));
+class AtomHandler extends abstract_sitemap_handler_1.default {
+    async handle(jsObject, format) {
+        const result = {
+            urls: []
+        };
+        if (sitemap_indictor_1.SitemapFormat.atom !== format) {
+            return result;
+        }
+        const entryFields = jsObject.feed.entry;
+        if (entryFields && entryFields.length > 0) {
+            entryFields.forEach((entryField) => {
+                const item = parseEntryField(entryField);
+                if (item !== undefined) {
+                    result.urls.push(item);
+                }
+            });
+        }
+        return result;
+    }
+}
+exports["default"] = AtomHandler;
+function parseEntryField(entryField) {
+    if (entryField.link === undefined || entryField.link['@href'] === undefined) {
+        return undefined;
+    }
+    const { error, url } = (0, utils_1.verifyURLString)(entryField.link['@href']);
+    if (error || url === undefined) {
+        throw new Error(`fail to parse itemField cause url field is invalid: ${JSON.stringify(entryField)}`);
+    }
+    const result = {
+        loc: url
+    };
+    if (entryField.updated) {
+        const updated = (0, dayjs_1.default)(entryField.updated);
+        if (updated.isValid()) {
+            result.lastmod = updated.toDate();
+        }
+    }
+    return result;
+}
+
+
+/***/ }),
+
 /***/ 7063:
 /***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
 
@@ -8652,10 +8728,11 @@ var __importStar = (this && this.__importStar) || function (mod) {
     return result;
 };
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.isFailureStrategy = exports.parseFailureStrategyInput = exports.parseTimeoutInput = exports.parseLimitInput = exports.isEndpoint = exports.parseEndpointInput = exports.isSinceUnit = exports.parseSinceUnitInput = exports.parseSinceInput = exports.parseKeyLocationInput = exports.parseKeyInput = exports.parseSitemapLocationInput = exports.parseInputs = exports.InvalidInputError = void 0;
+exports.isFailureStrategy = exports.parseFailureStrategyInput = exports.parseTimeoutInput = exports.parseLimitInput = exports.isEndpoint = exports.parseEndpointInput = exports.isSinceUnit = exports.parseSinceUnitInput = exports.parseSinceInput = exports.parseKeyLocationInput = exports.parseKeyInput = exports.parseSitemapLocationInput = exports.parseInputs = exports.InvalidInputError = exports.DEFAULT_TIMEOUT = exports.INDEXNOW_UPPER_LIMIT = void 0;
 const core = __importStar(__nccwpck_require__(2186));
 const utils_1 = __nccwpck_require__(1314);
-const INDEXNOW_UPPER_LIMIT = 10000;
+exports.INDEXNOW_UPPER_LIMIT = 10000;
+exports.DEFAULT_TIMEOUT = 10000;
 class InvalidInputError extends Error {
     constructor(message) {
         super(message);
@@ -8756,10 +8833,10 @@ function isEndpoint(endpoint) {
 exports.isEndpoint = isEndpoint;
 function parseLimitInput() {
     const limitInput = parseIntegerInput('limit');
-    if (limitInput <= INDEXNOW_UPPER_LIMIT) {
+    if (limitInput <= exports.INDEXNOW_UPPER_LIMIT) {
         return limitInput;
     }
-    throw new InvalidInputError(`limit with the value ${limitInput} exceeds upper limit. the upper limit is ${INDEXNOW_UPPER_LIMIT}.`);
+    throw new InvalidInputError(`limit with the value ${limitInput} exceeds upper limit. the upper limit is ${exports.INDEXNOW_UPPER_LIMIT}.`);
 }
 exports.parseLimitInput = parseLimitInput;
 function parseTimeoutInput() {
@@ -8849,6 +8926,61 @@ function run() {
     processor.process();
 }
 run();
+
+
+/***/ }),
+
+/***/ 8430:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const sitemap_indictor_1 = __nccwpck_require__(8725);
+const utils_1 = __nccwpck_require__(1314);
+const abstract_sitemap_handler_1 = __importDefault(__nccwpck_require__(4498));
+class RSSHandler extends abstract_sitemap_handler_1.default {
+    async handle(jsObject, format) {
+        const result = {
+            urls: []
+        };
+        if (sitemap_indictor_1.SitemapFormat.rss !== format) {
+            return result;
+        }
+        const channelField = jsObject.rss.channel;
+        if (channelField && channelField.item && channelField.item.length > 0) {
+            channelField.item.forEach((itemField) => {
+                const item = parseItemField(itemField);
+                if (item) {
+                    result.urls.push(item);
+                }
+            });
+        }
+        return result;
+    }
+}
+exports["default"] = RSSHandler;
+function parseItemField(itemField) {
+    if (itemField.link === undefined) {
+        return undefined;
+    }
+    const { error, url } = (0, utils_1.verifyURLString)(itemField.link);
+    if (error || url === undefined) {
+        throw new Error(`fail to parse itemField cause url field is invalid: ${JSON.stringify(itemField)}`);
+    }
+    const item = {
+        loc: url
+    };
+    // rss 2.0 spec: pubDate must follow the rfc 822
+    if (itemField.pubDate) {
+        const pubDate = new Date(itemField.pubDate);
+        item.lastmod = pubDate;
+    }
+    return item;
+}
 
 
 /***/ }),
@@ -9043,17 +9175,17 @@ const sitemap_filter_1 = __nccwpck_require__(9467);
 const since_filter_1 = __importDefault(__nccwpck_require__(8210));
 const limit_filter_1 = __importDefault(__nccwpck_require__(441));
 const sitemap_submitter_1 = __importDefault(__nccwpck_require__(26));
+const xml_sitemap_handler_1 = __importDefault(__nccwpck_require__(4702));
+const sitemapindex_handler_1 = __importDefault(__nccwpck_require__(4072));
+const rss_handler_1 = __importDefault(__nccwpck_require__(8430));
+const atom_handler_1 = __importDefault(__nccwpck_require__(2444));
 class SitemapProcessor {
     handlers;
     filterChain;
-    urlSet;
     options;
     constructor() {
         this.handlers = [];
         this.filterChain = new sitemap_filter_1.FilterChain();
-        this.urlSet = {
-            urls: []
-        };
     }
     async process() {
         try {
@@ -9072,6 +9204,10 @@ class SitemapProcessor {
     }
     initialize() {
         this.options = (0, inputs_1.parseInputs)();
+        this.registerHandler(new xml_sitemap_handler_1.default(this));
+        this.registerHandler(new sitemapindex_handler_1.default(this));
+        this.registerHandler(new rss_handler_1.default(this));
+        this.registerHandler(new atom_handler_1.default(this));
         this.filterChain.addFilter(new since_filter_1.default(this.options.since, this.options.sinceUnit));
         this.filterChain.addFilter(new limit_filter_1.default(this.options.limit));
     }
@@ -9083,7 +9219,7 @@ class SitemapProcessor {
     async submitToIndexNow(candidates) {
         (0, utils_1.logUrlsWithMessage)(candidates.urls, 'The following list of URLs will be submitted:');
         const sitemapSubmitter = new sitemap_submitter_1.default();
-        return await sitemapSubmitter.submit(candidates, this.options);
+        return sitemapSubmitter.submit(candidates, this.options);
     }
     showResult(result) {
         if (result.response === 'OK') {
@@ -9100,7 +9236,7 @@ class SitemapProcessor {
     registerHandler(handler) {
         this.handlers.push(handler);
     }
-    async prepareCandidateSitemaps(url, timeout = 10000) {
+    async prepareCandidateSitemaps(url, timeout) {
         const data = await sitemap_fetcher_1.SitemapFetcher.fetch(url, timeout);
         const content = await xml_parser_1.XmlParser.parse(data);
         const sitemapFormat = sitemap_indictor_1.SitemapIndicator.indicate(content);
@@ -9217,6 +9353,109 @@ exports["default"] = SitemapSubmitter;
 
 /***/ }),
 
+/***/ 4072:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __createBinding = (this && this.__createBinding) || (Object.create ? (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    var desc = Object.getOwnPropertyDescriptor(m, k);
+    if (!desc || ("get" in desc ? !m.__esModule : desc.writable || desc.configurable)) {
+      desc = { enumerable: true, get: function() { return m[k]; } };
+    }
+    Object.defineProperty(o, k2, desc);
+}) : (function(o, m, k, k2) {
+    if (k2 === undefined) k2 = k;
+    o[k2] = m[k];
+}));
+var __setModuleDefault = (this && this.__setModuleDefault) || (Object.create ? (function(o, v) {
+    Object.defineProperty(o, "default", { enumerable: true, value: v });
+}) : function(o, v) {
+    o["default"] = v;
+});
+var __importStar = (this && this.__importStar) || function (mod) {
+    if (mod && mod.__esModule) return mod;
+    var result = {};
+    if (mod != null) for (var k in mod) if (k !== "default" && Object.prototype.hasOwnProperty.call(mod, k)) __createBinding(result, mod, k);
+    __setModuleDefault(result, mod);
+    return result;
+};
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const sitemap_indictor_1 = __nccwpck_require__(8725);
+const utils_1 = __nccwpck_require__(1314);
+const abstract_sitemap_handler_1 = __importDefault(__nccwpck_require__(4498));
+const Inputs = __importStar(__nccwpck_require__(7063));
+const dayjs_1 = __importDefault(__nccwpck_require__(7401));
+class SitemapIndexHandler extends abstract_sitemap_handler_1.default {
+    constructor(processor) {
+        super(processor);
+    }
+    async handle(content, format) {
+        if (sitemap_indictor_1.SitemapFormat.index !== format) {
+            return { urls: [] };
+        }
+        const sitemapIndex = this.handleSitemapIndex(content);
+        const result = await this.processSitemapRecursively(sitemapIndex);
+        return result;
+    }
+    async processSitemapRecursively(sitemapIndex) {
+        const result = {
+            urls: []
+        };
+        for await (const site of sitemapIndex.sites) {
+            const urlSet = await this.sitemapProcessor?.prepareCandidateSitemaps(site.loc.href, this.sitemapProcessor?.options?.timeout ?? Inputs.DEFAULT_TIMEOUT);
+            urlSet?.urls.forEach(item => {
+                result.urls.push(item);
+            });
+        }
+        return result;
+    }
+    handleSitemapIndex(content) {
+        const sitemapIndex = {
+            sites: []
+        };
+        const sitemaps = content.sitemapindex.sitemap;
+        if (sitemaps?.length > 0) {
+            const sitemapList = sitemaps.map((sitemap) => {
+                const site = this.parseSitemapField(sitemap);
+                return site;
+            });
+            sitemapIndex.sites = sitemapList;
+        }
+        return sitemapIndex;
+    }
+    parseSitemapField(sitemap) {
+        if (sitemap && sitemap.loc) {
+            const { error, url } = (0, utils_1.verifyURLString)(sitemap.loc);
+            if (error || url === undefined) {
+                throw new Error(`fail to parse sitemap cause url field is invalid: ${JSON.stringify(sitemap)}`);
+            }
+            const result = {
+                loc: url
+            };
+            if (sitemap.lastmod) {
+                const lastmod = (0, dayjs_1.default)(sitemap.lastmod);
+                if (!lastmod.isValid()) {
+                    throw new Error(`fail to parse sitemap cause lastmod field is invalid: ${JSON.stringify(sitemap)}`);
+                }
+                else {
+                    result.lastmod = lastmod.toDate();
+                }
+            }
+            return result;
+        }
+        throw new Error(`fail to parse sitemap: ${JSON.stringify(sitemap)}`);
+    }
+}
+exports["default"] = SitemapIndexHandler;
+
+
+/***/ }),
+
 /***/ 7960:
 /***/ ((__unused_webpack_module, exports) => {
 
@@ -9269,17 +9508,13 @@ var __importStar = (this && this.__importStar) || function (mod) {
     __setModuleDefault(result, mod);
     return result;
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", ({ value: true }));
-exports.logWithStrategy = exports.logUrlsWithMessage = exports.log = exports.calculateWith = exports.verifyURLString = void 0;
+exports.logWithStrategy = exports.logUrlsWithMessage = exports.log = exports.verifyURLString = void 0;
 /**
  * @file Split utility functions to make unit test easier.
  */
 //import * as dayjs from 'dayjs'
 const node_url_1 = __nccwpck_require__(1041);
-const dayjs_1 = __importDefault(__nccwpck_require__(7401));
 const core = __importStar(__nccwpck_require__(2186));
 function verifyURLString(urlString) {
     if (!urlString) {
@@ -9301,12 +9536,6 @@ function verifyURLString(urlString) {
     }
 }
 exports.verifyURLString = verifyURLString;
-function calculateWith(past, unit) {
-    return (0, dayjs_1.default)()
-        .subtract(past, unit)
-        .valueOf();
-}
-exports.calculateWith = calculateWith;
 function log(msg, notice = false) {
     if (notice) {
         core.notice(msg);
@@ -9382,6 +9611,63 @@ const XmlParser = {
     }
 };
 exports.XmlParser = XmlParser;
+
+
+/***/ }),
+
+/***/ 4702:
+/***/ (function(__unused_webpack_module, exports, __nccwpck_require__) {
+
+"use strict";
+
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", ({ value: true }));
+const sitemap_indictor_1 = __nccwpck_require__(8725);
+const utils_1 = __nccwpck_require__(1314);
+const abstract_sitemap_handler_1 = __importDefault(__nccwpck_require__(4498));
+const dayjs_1 = __importDefault(__nccwpck_require__(7401));
+class XMLSitemapHandler extends abstract_sitemap_handler_1.default {
+    async handle(jsObject, format) {
+        const result = {
+            urls: []
+        };
+        if (sitemap_indictor_1.SitemapFormat.sitemap !== format) {
+            return result;
+        }
+        const URLFields = jsObject.urlset.url;
+        if (URLFields && URLFields.length > 0) {
+            URLFields.forEach((URLField) => {
+                const item = parseURLField(URLField);
+                if (item) {
+                    result.urls.push(item);
+                }
+            });
+        }
+        return result;
+    }
+}
+exports["default"] = XMLSitemapHandler;
+function parseURLField(URLField) {
+    if (!URLField.loc) {
+        return undefined;
+    }
+    const { error, url } = (0, utils_1.verifyURLString)(URLField.loc);
+    if (error || url === undefined) {
+        throw new Error(`fail to parse URLField cause url field is invalid: ${JSON.stringify(URLField)}`);
+    }
+    const result = {
+        loc: url
+    };
+    if (URLField.lastmod) {
+        const lastmod = (0, dayjs_1.default)(URLField.lastmod);
+        if (lastmod.isValid()) {
+            result.lastmod = lastmod.toDate();
+        }
+    }
+    return result;
+}
 
 
 /***/ }),
