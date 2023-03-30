@@ -15,6 +15,12 @@
   <a href="README.md">English version</a>
 </p>
 
+## 支持的格式
+
+- [x] XML Sitemap
+- [x] Sitemap Index
+- [x] RSS 2.0
+- [x] Atom 1.0
 ## 使用说明
 
 ### **前提条件**

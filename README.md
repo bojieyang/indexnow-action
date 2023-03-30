@@ -15,6 +15,12 @@ A GitHub Action that automatically submits URLs to participating search engines 
   <a href="README.zh.md">中文版本</a>
 </p>
 
+## Supported sitemap formats
+- [x] XML Sitemap
+- [x] Sitemap Index
+- [x] RSS 2.0
+- [x] Atom 1.0
+
 ## Usage
 
 ### **Prerequisites**
