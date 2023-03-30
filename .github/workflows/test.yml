@@ -18,7 +18,7 @@ jobs:
       - run: npm test
 
   # test action works running from the graph
-  test:
+  test-sitemap:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -26,5 +26,16 @@ jobs:
         with:
           sitemap-location: 'https://bojieyang.github.io/sitemap.xml'
           since: 1
+          since-unit: 'month'
+          key: ${{ secrets.INDEXNOW_KEY }}
+
+  test-atom:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ./
+        with:
+          sitemap-location: 'https://bojieyang.github.io/feed.xml'
+          since: 2
           since-unit: 'month'
           key: ${{ secrets.INDEXNOW_KEY }}
