@@ -28,7 +28,9 @@
 steps:
   - uses: bojieyang/indexnow-action@v1 # v1 is the latest major version following the action-versioning.
     with:
-      sitemap-location: 'https://example.com/sitemap.xml' # The location of your sitemap must start with http(s). Currently, XML Sitemap, Sitemap index, RSS and Atom formats are supported.
+    # The location of your sitemap must start with http(s). 
+    # Currently, XML Sitemap, Sitemap index, RSS and Atom formats are supported.
+      sitemap-location: 'https://example.com/sitemap.xml' 
       key: ${{ secrets.INDEXNOW_KEY }} # The key you get from IndexNow.
 ```
 
