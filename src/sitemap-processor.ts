@@ -12,6 +12,7 @@ export default class SitemapProcessor {
   handlers: SitemapHandler[];
   filterChain: FilterChain;
   urlSet: URLSet;
+  options: Options;
   constructor() {
     this.handlers = [];
     this.filterChain = new FilterChain();
@@ -20,14 +21,9 @@ export default class SitemapProcessor {
     };
   }
 
-  set options(options: Options) {
-    this.options = options;
-  }
-
   async process(): Promise<void> {
     try {
-      this.init();
-
+      this.initialize();
       const candidates = await this.fetchSitemapAndFilter();
 
       if (candidates.urls.length === 0) {
@@ -42,15 +38,13 @@ export default class SitemapProcessor {
     }
   }
 
-  init() {
-    const options: Options = parseInputs();
-    this.options = options;
+  initialize() {
+    this.options = parseInputs();
     this.filterChain.addFilter(
-      new SinceFilter(options.since, options.sinceUnit)
+      new SinceFilter(this.options.since, this.options.sinceUnit)
     );
-    this.filterChain.addFilter(new LimitFilter(options.limit));
+    this.filterChain.addFilter(new LimitFilter(this.options.limit));
   }
-
   async fetchSitemapAndFilter(): Promise<URLSet> {
     const candidates: URLSet = await this.prepareCandidateSitemaps(
       this.options.sitemapLocation.href,

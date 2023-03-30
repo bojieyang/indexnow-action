@@ -9047,6 +9047,7 @@ class SitemapProcessor {
     handlers;
     filterChain;
     urlSet;
+    options;
     constructor() {
         this.handlers = [];
         this.filterChain = new sitemap_filter_1.FilterChain();
@@ -9054,12 +9055,9 @@ class SitemapProcessor {
             urls: []
         };
     }
-    set options(options) {
-        this.options = options;
-    }
     async process() {
         try {
-            this.init();
+            this.initialize();
             const candidates = await this.fetchSitemapAndFilter();
             if (candidates.urls.length === 0) {
                 (0, utils_1.log)('No candidate urls need to submit.');
@@ -9072,11 +9070,10 @@ class SitemapProcessor {
             (0, utils_1.logWithStrategy)(err.message, this.options.failureStrategy);
         }
     }
-    init() {
-        const options = (0, inputs_1.parseInputs)();
-        this.options = options;
-        this.filterChain.addFilter(new since_filter_1.default(options.since, options.sinceUnit));
-        this.filterChain.addFilter(new limit_filter_1.default(options.limit));
+    initialize() {
+        this.options = (0, inputs_1.parseInputs)();
+        this.filterChain.addFilter(new since_filter_1.default(this.options.since, this.options.sinceUnit));
+        this.filterChain.addFilter(new limit_filter_1.default(this.options.limit));
     }
     async fetchSitemapAndFilter() {
         const candidates = await this.prepareCandidateSitemaps(this.options.sitemapLocation.href, this.options.timeout);
