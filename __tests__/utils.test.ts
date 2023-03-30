@@ -1,4 +1,4 @@
-import {verifyURLString, calculateWith} from '../src/utils';
+import {verifyURLString} from '../src/utils';
 import {describe, test, expect} from '@jest/globals';
 
 describe('verifyURLString function test cases', () => {
@@ -24,22 +24,5 @@ describe('verifyURLString function test cases', () => {
     expect(verifyURLString('https://example.com:demo')).not.toHaveProperty(
       'url'
     );
-  });
-});
-
-describe('calculateWith function test cases', () => {
-  test('calulate with 1 day', () => {
-    const oneDayMilliseconds = 24 * 60 * 60 * 1000;
-    const milliseconds = calculateWith(1, 'day');
-    const now = new Date().getTime();
-    const diff = now - milliseconds;
-    expect(diff).toBeGreaterThanOrEqual(oneDayMilliseconds);
-  });
-  test('calulate with 2 week', () => {
-    const twoWeekMilliseconds = 2 * 7 * 24 * 60 * 60 * 1000;
-    const milliseconds = calculateWith(2, 'week');
-    const now = new Date().getTime();
-    const diff = now - milliseconds;
-    expect(diff).toBeGreaterThanOrEqual(twoWeekMilliseconds);
   });
 });

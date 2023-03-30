@@ -4,7 +4,7 @@ import {URLItem, URLSet} from './sitemap-handler';
 import AbstractSitemapHandler from './abstract-sitemap-handler';
 import dayjs from 'dayjs';
 
-export class AtomHandler extends AbstractSitemapHandler {
+export default class AtomHandler extends AbstractSitemapHandler {
   async handle(jsObject: any, format: SitemapFormat): Promise<URLSet> {
     const result: URLSet = {
       urls: []

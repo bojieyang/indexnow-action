@@ -3,7 +3,7 @@ import {verifyURLString} from './utils';
 import {URLSet} from './sitemap-handler';
 import AbstractSitemapHandler from './abstract-sitemap-handler';
 import SitemapProcessor from './sitemap-processor';
-
+import * as Inputs from './inputs';
 import dayjs from 'dayjs';
 export interface Sitemap {
   loc: URL;
@@ -34,7 +34,8 @@ export default class SitemapIndexHandler extends AbstractSitemapHandler {
 
     for await (const site of sitemapIndex.sites) {
       const urlSet = await this.sitemapProcessor?.prepareCandidateSitemaps(
-        site.loc.href
+        site.loc.href,
+        this.sitemapProcessor?.options?.timeout ?? Inputs.DEFAULT_TIMEOUT
       );
       urlSet?.urls.forEach(item => {
         result.urls.push(item);

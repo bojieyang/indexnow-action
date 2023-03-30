@@ -3,7 +3,6 @@
  */
 //import * as dayjs from 'dayjs'
 import {URL} from 'node:url';
-import dayjs from 'dayjs';
 import * as core from '@actions/core';
 import {URLItem} from './sitemap-handler';
 
@@ -26,12 +25,6 @@ export function verifyURLString(urlString: string): {
   } catch (err: any) {
     return {error: `${err.message} with ${urlString}`};
   }
-}
-
-export function calculateWith(past: number, unit: string) {
-  return dayjs()
-    .subtract(past, unit as dayjs.ManipulateType)
-    .valueOf();
 }
 
 export function log(msg: string, notice = false): void {

@@ -8,17 +8,18 @@ import {FilterChain} from './sitemap-filter';
 import SinceFilter from './since-filter';
 import LimitFilter from './limit-filter';
 import SitemapSubmitter from './sitemap-submitter';
+import XMLSitemapHandler from './xml-sitemap-handler';
+import SitemapIndexHandler from './sitemapindex-handler';
+import RSSHandler from './rss-handler';
+import AtomHandler from './atom-handler';
 export default class SitemapProcessor {
   handlers: SitemapHandler[];
   filterChain: FilterChain;
-  urlSet: URLSet;
   options: Options;
+
   constructor() {
     this.handlers = [];
     this.filterChain = new FilterChain();
-    this.urlSet = {
-      urls: []
-    };
   }
 
   async process(): Promise<void> {
@@ -40,17 +41,23 @@ export default class SitemapProcessor {
 
   initialize() {
     this.options = parseInputs();
+
+    this.registerHandler(new XMLSitemapHandler(this));
+    this.registerHandler(new SitemapIndexHandler(this));
+    this.registerHandler(new RSSHandler(this));
+    this.registerHandler(new AtomHandler(this));
+
     this.filterChain.addFilter(
       new SinceFilter(this.options.since, this.options.sinceUnit)
     );
     this.filterChain.addFilter(new LimitFilter(this.options.limit));
   }
+
   async fetchSitemapAndFilter(): Promise<URLSet> {
     const candidates: URLSet = await this.prepareCandidateSitemaps(
       this.options.sitemapLocation.href,
       this.options.timeout
     );
-
     candidates.urls = this.filterChain.doFilter(candidates.urls);
 
     return candidates;
@@ -62,7 +69,7 @@ export default class SitemapProcessor {
       'The following list of URLs will be submitted:'
     );
     const sitemapSubmitter = new SitemapSubmitter();
-    return await sitemapSubmitter.submit(candidates, this.options);
+    return sitemapSubmitter.submit(candidates, this.options);
   }
 
   showResult(result: {response: string; reason: string}) {
@@ -81,7 +88,7 @@ export default class SitemapProcessor {
 
   async prepareCandidateSitemaps(
     url: string,
-    timeout = 10000
+    timeout: number
   ): Promise<URLSet> {
     const data = await SitemapFetcher.fetch(url, timeout);
     const content = await XmlParser.parse(data);

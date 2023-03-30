@@ -4,7 +4,7 @@ import {describe, test, expect, beforeAll} from '@jest/globals';
 import {SitemapFormat} from '../src/sitemap-indictor';
 import {XmlParser} from '../src/xml-parser';
 import dayjs from 'dayjs';
-import {AtomHandler} from '../src/atom-handler';
+import AtomHandler from '../src/atom-handler';
 
 let atomContent: string;
 beforeAll(() => {

@@ -1,6 +1,8 @@
 import * as core from '@actions/core';
 import {verifyURLString} from './utils';
-const INDEXNOW_UPPER_LIMIT = 10000;
+
+export const INDEXNOW_UPPER_LIMIT = 10000;
+export const DEFAULT_TIMEOUT = 10000;
 
 export type SinceUnit = 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year';
 export type Endpoint =
