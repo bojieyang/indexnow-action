@@ -25,6 +25,6 @@ jobs:
       - uses: ./
         with:
           sitemap-location: 'https://bojieyang.github.io/sitemap.xml'
-          since: 10
-          since-unit: 'day'
+          since: 1
+          since-unit: 'month'
           key: ${{ secrets.INDEXNOW_KEY }}
