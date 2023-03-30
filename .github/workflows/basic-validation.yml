@@ -14,6 +14,6 @@ on:
 jobs:
   call-basic-validation:
     name: Basic validation
+    env:
+      INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }} # INDEXNOW_KEY env variable is only used in unit tests.
     uses: actions/reusable-workflows/.github/workflows/basic-validation.yml@main
-    with:
-      node-version: '18'

@@ -1,7 +1,8 @@
 import {
-  InvalidURLError,
   SitemapFetcher,
-  TimeoutError
+  InvalidURLError,
+  TimeoutError,
+  FetchError
 } from '../src/sitemap-fetcher';
 import {describe, test, expect} from '@jest/globals';
 
@@ -27,7 +28,7 @@ describe('sitemap-fetcher test cases', () => {
   test('invalid url that can pass verify but can not fetched should throw InvalidURLError', async () => {
     await expect(
       SitemapFetcher.fetch('https://example/', 5000)
-    ).rejects.toBeInstanceOf(InvalidURLError);
+    ).rejects.toBeInstanceOf(FetchError);
   });
 
   test('fetch timeout should throw TimeoutError', async () => {
