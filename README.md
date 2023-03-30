@@ -15,12 +15,6 @@ A GitHub Action that automatically submits URLs to participating search engines 
   <a href="README.zh.md">中文版本</a>
 </p>
 
-## Supported sitemap formats
-- [x] XML Sitemap
-- [x] Sitemap Index
-- [x] RSS 2.0
-- [x] Atom 1.0
-
 ## Usage
 
 ### **Prerequisites**
@@ -35,7 +29,7 @@ If you don't know how to get the key file, see [IndexNow Document](https://www.i
 steps:
   - uses: bojieyang/indexnow-action@v1 # v1 is the latest major version following the action-versioning.
     with:
-      sitemap-location: 'https://example.com/sitemap.xml' # your sitemap location, must start with http(s).
+      sitemap-location: 'https://example.com/sitemap.xml' # The location of your sitemap must start with http(s). Currently, XML Sitemap, Sitemap index, RSS and Atom formats are supported.
       key: ${{ secrets.INDEXNOW_KEY }} # The key you get from IndexNow.
 ```
 
@@ -109,6 +103,13 @@ View code from [here](https://github.com/bojieyang/bojieyang.github.io/blob/mast
   Define the strategy when submit failed. Available strategies are `ignore` and `error`.
   For `ignore`, will outputting an notice only.
   For `error`, outputting an error message also sets the status of action to fail. The default value is `ignore`.
+
+
+## Supported sitemap formats
+- [x] XML Sitemap
+- [x] Sitemap Index
+- [x] RSS 2.0
+- [x] Atom 1.0
 
 ## Maintainers
 

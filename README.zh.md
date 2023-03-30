@@ -15,12 +15,6 @@
   <a href="README.md">English version</a>
 </p>
 
-## 支持的格式
-
-- [x] XML Sitemap
-- [x] Sitemap Index
-- [x] RSS 2.0
-- [x] Atom 1.0
 ## 使用说明
 
 ### **前提条件**
@@ -34,7 +28,7 @@
 steps:
   - uses: bojieyang/indexnow-action@v1 # v1 is the latest major version following the action-versioning.
     with:
-      sitemap-location: 'https://example.com/sitemap.xml' # your sitemap location, must start with http(s).
+      sitemap-location: 'https://example.com/sitemap.xml' # The location of your sitemap must start with http(s). Currently, XML Sitemap, Sitemap index, RSS and Atom formats are supported.
       key: ${{ secrets.INDEXNOW_KEY }} # The key you get from IndexNow.
 ```
 
@@ -110,6 +104,12 @@ jobs:
   设置为 `ignore`, 表示仅输出提醒信息。
   设置为 `error`, 表示输出错误信息的同时会将 Action Status 设置为失败。默认值为`ignore`。
 
+## 支持的格式
+
+- [x] XML Sitemap
+- [x] Sitemap Index
+- [x] RSS 2.0
+- [x] Atom 1.0
 ## 维护者
 
 [@bojieyang](https://github.com/bojieyang)
