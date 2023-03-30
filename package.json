@@ -4,16 +4,15 @@
   "description": "Automatically submit URLs through the IndexNow protocol.",
   "main": "index.js",
   "engines": {
-    "node": ">=16.0"
+    "node": ">=18.0"
   },
   "scripts": {
-    "lint": "eslint --config ./.eslintrc.json ./*.js",
-    "lint:fix": "eslint --config ./.eslintrc.json ./*.js --fix",
-    "format": "prettier --no-error-on-unmatched-pattern --config ./.prettierrc.js --write './*.{js,ts,yml,yaml}'",
-    "format-check": "prettier --no-error-on-unmatched-pattern --config ./.prettierrc.js --check './*.{js,ts,yml,yaml}'",
-    "build": "ncc build index.js -o dist --source-map --license licenses.txt",
-    "test": "jest --coverage",
-    "test:ci": "jest utils",
+    "lint": "eslint --config ./.eslintrc.js **/*.ts",
+    "lint:fix": "eslint --config ./.eslintrc.js **/*.ts --fix",
+    "format": "prettier --no-error-on-unmatched-pattern --config ./.prettierrc.js --write '**/*.{js,ts,yml,yaml,xml}'",
+    "format-check": "prettier --no-error-on-unmatched-pattern --config ./.prettierrc.js --check '**/*.{js,ts,yml,yaml,xml}'",
+    "build": "ncc build src/main.ts -o dist --source-map --license licenses.txt",
+    "test": "jest --forceExit",
     "pre-checkin": "npm run format && npm run lint:fix && npm run build && npm test"
   },
   "repository": {
@@ -33,15 +32,23 @@
   "homepage": "https://github.com/bojieyang/indexnow-action#readme",
   "dependencies": {
     "@actions/core": "^1.10.0",
-    "ansi-styles": "^5.2.0",
     "dayjs": "^1.11.7",
-    "got": "^11.8.6",
-    "sitemapper": "^3.2.6"
+    "fast-xml-parser": "^4.1.3"
   },
   "devDependencies": {
+    "@prettier/plugin-xml": "^2.2.0",
+    "@types/node": "^16.11.25",
+    "@types/semver": "^6.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
     "@vercel/ncc": "^0.36.1",
+    "dotenv": "^16.0.3",
     "eslint": "^8.36.0",
+    "eslint-config-prettier": "^8.8.0",
+    "eslint-plugin-jest": "^27.2.1",
     "jest": "^29.5.0",
-    "prettier": "^2.8.6"
+    "prettier": "^2.8.6",
+    "ts-jest": "^29.0.5",
+    "typescript": "^4.9.x"
   }
 }

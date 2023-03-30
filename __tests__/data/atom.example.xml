@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator>
+  <link
+    href="https://bojieyang.github.io/feed.xml"
+    rel="self"
+    type="application/atom+xml"
+  />
+  <link href="https://bojieyang.github.io/" rel="alternate" type="text/html" />
+  <updated>2023-03-23T09:42:52+08:00</updated>
+  <id>https://bojieyang.github.io/feed.xml</id>
+  <title type="html">JieTalk</title>
+  <subtitle>A personal blog about Wealth, Happiness and Preferences</subtitle>
+  <author>
+  <name>bojieyang</name></author>
+  <entry><title type="html">几个让我保持身材的生活习惯</title><link
+      href="https://bojieyang.github.io/posts/a-few-life-hacks-keep-me-slim/"
+      rel="alternate"
+      type="text/html"
+      title="几个让我保持身材的生活习惯"
+    /><published>2023-03-20T00:00:00+08:00</published><updated
+    >2023-03-20T00:00:00+08:00</updated><id
+    >https://bojieyang.github.io/posts/a-few-life-hacks-keep-me-slim</id><author
+    ><name>bojieyang</name></author><category term="生活方式" /><category
+      term="健身"
+    /><category term="瘦身" /><category term="减脂" /><summary
+      type="html"
+    ><![CDATA[一个多月无刻意节食，我仍然瘦了 8 斤。]]></summary><media:thumbnail
+      xmlns:media="http://search.yahoo.com/mrss/"
+      url="https://bojieyang.github.io/assets/img/dist/a_few_life_hacks_keep_me_slim.webp"
+    /><media:content
+      medium="image"
+      url="https://bojieyang.github.io/assets/img/dist/a_few_life_hacks_keep_me_slim.webp"
+      xmlns:media="http://search.yahoo.com/mrss/"
+    /></entry><entry><title
+      type="html"
+    >我的第一个 Github Action 发布了</title><link
+      href="https://bojieyang.github.io/posts/my-first-github-action-released/"
+      rel="alternate"
+      type="text/html"
+      title="我的第一个 Github Action 发布了"
+    /><published>2023-03-13T00:00:00+08:00</published><updated
+    >2023-03-13T00:00:00+08:00</updated><id
+    >https://bojieyang.github.io/posts/my-first-github-action-released</id><author
+    ><name>bojieyang</name></author><category term="产品心得" /><category
+      term="SEO"
+    /><category term="IndexNow" /><category term="GitHub Action" /><category
+      term="IndexNow Action"
+    /><summary
+      type="html"
+    ><![CDATA[记录我开发并上架第一个 GitHub Action 的过程和从其中学到的东西]]></summary><media:thumbnail
+      xmlns:media="http://search.yahoo.com/mrss/"
+      url="https://bojieyang.github.io/assets/img/dist/indexnow_action_released.webp"
+    /><media:content
+      medium="image"
+      url="https://bojieyang.github.io/assets/img/dist/indexnow_action_released.webp"
+      xmlns:media="http://search.yahoo.com/mrss/"
+    /></entry><entry><title
+      type="html"
+    >学做菜的第一个月，比我想象的简单</title><link
+      href="https://bojieyang.github.io/posts/cooking-in-february/"
+      rel="alternate"
+      type="text/html"
+      title="学做菜的第一个月，比我想象的简单"
+    /><published>2023-03-06T00:00:00+08:00</published><updated
+    >2023-03-06T00:00:00+08:00</updated><id
+    >https://bojieyang.github.io/posts/cooking-in-february</id><author><name
+      >bojieyang</name></author><category term="生活方式" /><category
+      term="年度挑战 - 2023"
+    /><category term="烹饪" /><summary
+      type="html"
+    ><![CDATA[二月份我一共做了 16 道菜。从只会煮蛋泡面到基本半小时内搞定一道简易菜；从家里只有盐和酱油到现在有十多种不同的调料；点外卖和在餐馆吃饭的次数用两只手也能数得清了。]]></summary><media:thumbnail
+      xmlns:media="http://search.yahoo.com/mrss/"
+      url="https://bojieyang.github.io/assets/img/dist/my_best_cooking_of_february.webp"
+    /><media:content
+      medium="image"
+      url="https://bojieyang.github.io/assets/img/dist/my_best_cooking_of_february.webp"
+      xmlns:media="http://search.yahoo.com/mrss/"
+    /></entry><entry><title type="html">2023 年度挑战</title><link
+      href="https://bojieyang.github.io/posts/annual-challenge-2023/"
+      rel="alternate"
+      type="text/html"
+      title="2023 年度挑战"
+    /><published>2023-03-04T00:00:00+08:00</published><updated
+    >2023-03-04T00:00:00+08:00</updated><id
+    >https://bojieyang.github.io/posts/annual-challenge-2023</id><author><name
+      >bojieyang</name></author><category term="生活方式" /><category
+      term="年度挑战 - 2023"
+    /><category term="烹饪" /><summary
+      type="html"
+    ><![CDATA[2023 的年度挑战是做一百道菜。]]></summary><media:thumbnail
+      xmlns:media="http://search.yahoo.com/mrss/"
+      url="https://bojieyang.github.io/assets/img/dist/annual_challenge_2023.webp"
+    /><media:content
+      medium="image"
+      url="https://bojieyang.github.io/assets/img/dist/annual_challenge_2023.webp"
+      xmlns:media="http://search.yahoo.com/mrss/"
+    /></entry><entry><title type="html">持有等于买入</title><link
+      href="https://bojieyang.github.io/posts/holding-is-buying/"
+      rel="alternate"
+      type="text/html"
+      title="持有等于买入"
+    /><published>2023-02-23T00:00:00+08:00</published><updated
+    >2023-02-23T00:00:00+08:00</updated><id
+    >https://bojieyang.github.io/posts/holding-is-buying</id><author><name
+      >bojieyang</name></author><category term="投资" /><category
+      term="投资"
+    /><category term="投资备忘录" /><summary
+      type="html"
+    ><![CDATA[「持有等于买入」是一个强大的思维工具，可以帮助你摆脱心理账户对投资的影响。]]></summary><media:thumbnail
+      xmlns:media="http://search.yahoo.com/mrss/"
+      url="https://bojieyang.github.io/assets/img/dist/holding_is_buying.webp"
+    /><media:content
+      medium="image"
+      url="https://bojieyang.github.io/assets/img/dist/holding_is_buying.webp"
+      xmlns:media="http://search.yahoo.com/mrss/"
+    /></entry><entry><title type="html">警惕没有坚实基础的宏大叙事</title><link
+      href="https://bojieyang.github.io/posts/be-wary-of-metanarratives-without-solid-foundations/"
+      rel="alternate"
+      type="text/html"
+      title="警惕没有坚实基础的宏大叙事"
+    /><published>2023-01-03T00:00:00+08:00</published><updated
+    >2023-01-03T00:00:00+08:00</updated><id
+    >https://bojieyang.github.io/posts/be-wary-of-metanarratives-without-solid-foundations</id><author
+    ><name>bojieyang</name></author><category term="投资" /><category
+      term="投资"
+    /><category term="投资备忘录" /><summary
+      type="html"
+    ><![CDATA[宏大叙事对发掘某个具体的投资标的的帮助是非常有限的。但适当了解宏大叙事，有助于及时了解行业变化趋势，从而为选择朝阳行业中的好公司打下基础。]]></summary><media:thumbnail
+      xmlns:media="http://search.yahoo.com/mrss/"
+      url="https://bojieyang.github.io/assets/img/dist/be_wary_of_metanarratives_without_solid_foundations.webp"
+    /><media:content
+      medium="image"
+      url="https://bojieyang.github.io/assets/img/dist/be_wary_of_metanarratives_without_solid_foundations.webp"
+      xmlns:media="http://search.yahoo.com/mrss/"
+    /></entry><entry><title type="html">投资备忘录系列开启</title><link
+      href="https://bojieyang.github.io/posts/invest-memo/"
+      rel="alternate"
+      type="text/html"
+      title="投资备忘录系列开启"
+    /><published>2022-12-05T00:00:00+08:00</published><updated
+    >2022-12-05T00:00:00+08:00</updated><id
+    >https://bojieyang.github.io/posts/invest-memo</id><author><name
+      >bojieyang</name></author><category term="投资" /><category
+      term="投资"
+    /><category term="投资备忘录" /><summary
+      type="html"
+    ><![CDATA[开启投资备忘录系列，不定期更新。]]></summary><media:thumbnail
+      xmlns:media="http://search.yahoo.com/mrss/"
+      url="https://bojieyang.github.io/assets/img/dist/invest_memo_medium.webp"
+    /><media:content
+      medium="image"
+      url="https://bojieyang.github.io/assets/img/dist/invest_memo_medium.webp"
+      xmlns:media="http://search.yahoo.com/mrss/"
+    /></entry><entry><title type="html">近火已灭，远水未至</title><link
+      href="https://bojieyang.github.io/posts/short-term-risks-eliminated-but-long-term-risks-remain/"
+      rel="alternate"
+      type="text/html"
+      title="近火已灭，远水未至"
+    /><published>2022-12-05T00:00:00+08:00</published><updated
+    >2022-12-05T00:00:00+08:00</updated><id
+    >https://bojieyang.github.io/posts/short-term-risks-eliminated-but-long-term-risks-remain</id><author
+    ><name>bojieyang</name></author><category term="投资" /><category
+      term="投资"
+    /><category term="投资备忘录" /><summary
+      type="html"
+    ><![CDATA[短期来看，存在一个新冠防疫政策转向带来的，持续半年至一年半左右的投资机会。长期来看，中国面临的政治与经济的压力并没有减弱，反而是持续强化的。]]></summary></entry><entry
+  ><title type="html">用产品定位法进行需求分析</title><link
+      href="https://bojieyang.github.io/posts/requirements-analysis-with-product-positioning/"
+      rel="alternate"
+      type="text/html"
+      title="用产品定位法进行需求分析"
+    /><published>2022-08-01T00:00:00+08:00</published><updated
+    >2022-08-01T00:00:00+08:00</updated><id
+    >https://bojieyang.github.io/posts/requirements-analysis-with-product-positioning</id><author
+    ><name>bojieyang</name></author><category term="产品心得" /><category
+      term="创造的乐趣"
+    /><category term="planned.today" /><category term="需求分析" /><category
+      term="产品定位"
+    /><category term="产品切入点" /><summary
+      type="html"
+    ><![CDATA[通过产品定位和切入点来判断需求的必要性与优先级。]]></summary></entry><entry
+  ><title type="html">用睡到自然醒的方式早起</title><link
+      href="https://bojieyang.github.io/posts/wake-up-early-the-natural-way/"
+      rel="alternate"
+      type="text/html"
+      title="用睡到自然醒的方式早起"
+    /><published>2022-07-25T00:00:00+08:00</published><updated
+    >2022-07-25T00:00:00+08:00</updated><id
+    >https://bojieyang.github.io/posts/wake-up-early-the-natural-way</id><author
+    ><name>bojieyang</name></author><category term="生活方式" /><category
+      term="睡眠质量"
+    /><category term="早起" /><summary
+      type="html"
+    ><![CDATA[如果你也总是早上起床后精神不佳，效率全无，不妨试试这个方法。]]></summary></entry></feed>

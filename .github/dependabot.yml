@@ -9,10 +9,3 @@ updates:
     directory: /
     schedule:
       interval: daily
-    ignore:
-      - dependency-name: 'ansi-styles'
-        update-types:
-          ['version-update:semver-major', 'version-update:semver-minor']
-      - dependency-name: 'got'
-        update-types:
-          ['version-update:semver-major', 'version-update:semver-minor']
