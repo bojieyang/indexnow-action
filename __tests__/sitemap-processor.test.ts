@@ -158,7 +158,7 @@ describe('sitemap-processor test cases', () => {
     await sitemapProcessor.process();
 
     expect(sitemapProcessor.options.key).toStrictEqual(
-      process.env['INDEXNOW_KEY']
+      process.env['INDEXNOW_KEY'] ?? ''
     );
     expect(sitemapProcessor.options.since).toStrictEqual(1);
     expect(sitemapProcessor.options.sinceUnit).toStrictEqual('month');
@@ -174,7 +174,7 @@ describe('sitemap-processor test cases', () => {
         endpoint: 'www.bing.com',
         limit: 100,
         timeout: 10000,
-        failureStrategy: 'error'
+        failureStrategy: 'ignore'
       };
     });
     const sitemapProcessor = new SitemapProcessor();
