@@ -119,7 +119,9 @@ View code from [here](https://github.com/bojieyang/bojieyang.github.io/blob/mast
 
 ## Acknowledgements
 
-Use [@seantomburke/sitemapper](https://github.com/seantomburke/sitemapper) to fetch and parse sitemap.
+Use [lquixada/cross-fetch](https://github.com/lquixada/cross-fetch) to polyfill the WHATWG Fetch API.
+
+Use [@NaturalIntelligence/fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser) to parse XML.
 
 Use [@iamkun/dayjs](https://github.com/iamkun/dayjs) to simplify date-related calculations.
 

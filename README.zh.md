@@ -118,7 +118,9 @@ jobs:
 
 ## 致谢
 
-使用 [@seantomburke/sitemapper](https://github.com/seantomburke/sitemapper) 获取和解析 sitemap.
+使用 [lquixada/cross-fetch](https://github.com/lquixada/cross-fetch) 在 Nodejs v16 版本中兼容 WHATWG Fetch API。 
+
+使用 [@NaturalIntelligence/fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser) 解析 XML。
 
 使用 [@iamkun/dayjs](https://github.com/iamkun/dayjs) 简化日期相关的计算。
 
