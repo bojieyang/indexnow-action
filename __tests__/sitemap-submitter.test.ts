@@ -57,8 +57,11 @@ describe('sitemap-submitter test cases', () => {
     const indexNowKey = process.env['INDEXNOW_KEY']
       ? process.env['INDEXNOW_KEY']
       : '';
+    if (indexNowKey.length === 0) {
+      // means it can not get key from env, happened on call reuseable-action
+      return;
+    }
     expect(indexNowKey.length).toBeGreaterThan(0);
-
     const sitemapSubmitter = new SitemapSubmitter();
     const sitemaps: URLSet = {
       urls: [

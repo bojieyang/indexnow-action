@@ -145,7 +145,7 @@ describe('sitemap-processor test cases', () => {
     jest.spyOn(Inputs, 'parseInputs').mockImplementationOnce(() => {
       return {
         sitemapLocation: new URL('https://bojieyang.github.io/sitemap.xml'),
-        key: process.env['INDEXNOW_KEY'] as string,
+        key: process.env['INDEXNOW_KEY'] ?? '',
         since: 1,
         sinceUnit: 'month',
         endpoint: 'www.bing.com',
@@ -168,7 +168,7 @@ describe('sitemap-processor test cases', () => {
     jest.spyOn(Inputs, 'parseInputs').mockImplementationOnce(() => {
       return {
         sitemapLocation: new URL('ftp://bojieyang.github.io/sitemap.xml'),
-        key: process.env['INDEXNOW_KEY'] as string,
+        key: process.env['INDEXNOW_KEY'] ?? '',
         since: 1,
         sinceUnit: 'day',
         endpoint: 'www.bing.com',
