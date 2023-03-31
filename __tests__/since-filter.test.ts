@@ -36,7 +36,7 @@ describe('since-filter test cases', () => {
     expect(result[2].loc.href).toStrictEqual('https://example.com/3.xml');
   });
 
-  test('some items do not contain lastmod property should not filterd', () => {
+  test('some items do not contain lastmod property should be excluded by default', () => {
     const data = [
       {
         loc: new URL('https://example.com/1.xml')
@@ -51,6 +51,26 @@ describe('since-filter test cases', () => {
       }
     ];
     const filter = new SinceFilter(1, 'day'); // last 1 day
+    const result = filter.filter(data);
+    expect(result.length).toStrictEqual(1);
+    expect(result[0].loc.href).toStrictEqual('https://example.com/2.xml');
+  });
+
+  test('items without lastmod property should not excluded when lastmodFieldMandatory set to false', () => {
+    const data = [
+      {
+        loc: new URL('https://example.com/1.xml')
+      },
+      {
+        loc: new URL('https://example.com/2.xml'),
+        lastmod: dayjs().subtract(23, 'hour').toDate()
+      },
+      {
+        loc: new URL('https://example.com/3.xml'),
+        lastmod: dayjs().subtract(2, 'day').toDate()
+      }
+    ];
+    const filter = new SinceFilter(1, 'day', false); // last 1 day
     const result = filter.filter(data);
     expect(result.length).toStrictEqual(2);
     expect(result[0].loc.href).toStrictEqual('https://example.com/1.xml');

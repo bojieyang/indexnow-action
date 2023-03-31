@@ -35,7 +35,7 @@ export default class SitemapProcessor {
       const result = await this.submitToIndexNow(candidates);
       this.showResult(result);
     } catch (err: any) {
-      logWithStrategy(err.message, this.options.failureStrategy);
+      logWithStrategy(err.message, this.options?.failureStrategy ?? 'error');
     }
   }
 

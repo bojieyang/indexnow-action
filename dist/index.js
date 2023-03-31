@@ -8998,20 +8998,18 @@ const dayjs_1 = __importDefault(__nccwpck_require__(7401));
 class SinceFilter {
     since;
     sinceUnit;
-    constructor(since, sinceUnit) {
+    lastmodFieldMandatory;
+    constructor(since, sinceUnit, lastmodFieldMandatory = true) {
         this.since = since;
         this.sinceUnit = sinceUnit;
+        this.lastmodFieldMandatory = lastmodFieldMandatory;
     }
     filter(urls) {
         const sinced = (0, dayjs_1.default)().subtract(this.since, this.sinceUnit);
         return urls.filter(item => {
-            if (item.lastmod === undefined) {
-                return true;
-            }
-            if (item.lastmod && sinced.isBefore(item.lastmod)) {
-                return true;
-            }
-            return false;
+            return this.lastmodFieldMandatory
+                ? item.lastmod && sinced.isBefore(item.lastmod)
+                : item.lastmod === undefined || sinced.isBefore(item.lastmod);
         });
     }
 }
@@ -9199,7 +9197,7 @@ class SitemapProcessor {
             this.showResult(result);
         }
         catch (err) {
-            (0, utils_1.logWithStrategy)(err.message, this.options.failureStrategy);
+            (0, utils_1.logWithStrategy)(err.message, this.options?.failureStrategy ?? 'error');
         }
     }
     initialize() {
