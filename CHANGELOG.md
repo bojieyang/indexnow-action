@@ -7,6 +7,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.1.2] - 2023-06-25
+
+### Security
+
+- Upgrade fast-xml-parser to 4.2.5 to fix regex vulnerability security issue.
+
 ## [1.1.1] - 2023-06-07
 
 ### Security
