@@ -13,7 +13,7 @@ jobs:
     env:
       INDEXNOW_KEY: ${{ secrets.INDEXNOW_KEY }} # INDEXNOW_KEY env variable is only used in unit tests.
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - run: npm ci
       - run: npm test
 
@@ -21,7 +21,7 @@ jobs:
   test-sitemap:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./
         with:
           sitemap-location: 'https://bojieyang.github.io/sitemap.xml'
@@ -32,7 +32,7 @@ jobs:
   test-atom:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: ./
         with:
           sitemap-location: 'https://bojieyang.github.io/feed.xml'
