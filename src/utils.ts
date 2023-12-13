@@ -14,6 +14,10 @@ export function verifyURLString(urlString: string): {
     return {error: 'url is undefined or empty.'};
   }
   try {
+    const isValid = URL.canParse(urlString);
+    if (!isValid) {
+      return {error: `${urlString} is invalid.`};
+    }
     const result = new URL(urlString);
     if (result.protocol === 'http:' || result.protocol === 'https:') {
       return {url: result};
