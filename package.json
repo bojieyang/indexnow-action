@@ -32,7 +32,7 @@
   "homepage": "https://github.com/bojieyang/indexnow-action#readme",
   "dependencies": {
     "@actions/core": "^1.10.0",
-    "cross-fetch": "^3.1.6",
+    "cross-fetch": "^4.0.0",
     "dayjs": "^1.11.10",
     "fast-xml-parser": "^4.2.5"
   },
