@@ -40,7 +40,7 @@
     "@prettier/plugin-xml": "^3.2.2",
     "@types/node": "^20.10.6",
     "@types/semver": "^7.5.6",
-    "@typescript-eslint/eslint-plugin": "^6.16.0",
+    "@typescript-eslint/eslint-plugin": "^6.18.0",
     "@typescript-eslint/parser": "^6.17.0",
     "@vercel/ncc": "^0.38.1",
     "dotenv": "^16.3.1",
