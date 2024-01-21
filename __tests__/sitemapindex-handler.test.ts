@@ -36,4 +36,26 @@ describe('sitemapindex-handler test cases', () => {
       dayjs('2005-01-01').toDate()
     );
   });
+
+  test('sitemap index with single sitemap', async () => {
+    indexContent = readFileSync(
+      resolve(__dirname, './data/sitemap-index-single.example.xml')
+    ).toString();
+
+    const sitemapIndexHandler = new SitemapIndexHandler();
+    const sitemapIndex = sitemapIndexHandler.handleSitemapIndex(
+      await XmlParser.parse(indexContent)
+    );
+
+    expect(sitemapIndex).toBeTruthy();
+    expect(sitemapIndex.sites).toBeTruthy();
+    expect(sitemapIndex.sites.length).toEqual(1);
+
+    expect(sitemapIndex.sites[0].loc.href).toStrictEqual(
+      'http://www.example.com/sitemap1.xml.gz'
+    );
+    expect(sitemapIndex.sites[0].lastmod).toStrictEqual(
+      dayjs('2004-10-01T18:23:17+00:00').toDate()
+    );
+  });
 });
