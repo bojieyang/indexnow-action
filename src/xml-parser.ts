@@ -1,9 +1,22 @@
 import {XMLParser} from 'fast-xml-parser';
 
+const alwaysArray = [
+  'sitemapindex.sitemap',
+  'urlset.url',
+  'rss.channel.item',
+  'feed.entry'
+];
+
 const parseOptions = {
   ignoreAttributes: false,
   attributeNamePrefix: '@',
-  isArray: (tagName: string) => tagName === 'sitemap'
+  isArray: (name: string, jpath: string) => {
+    if (alwaysArray.indexOf(jpath) !== -1) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 };
 
 const XmlParser = {

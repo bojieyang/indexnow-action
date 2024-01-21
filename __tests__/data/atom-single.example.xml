@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+<generator uri="https://jekyllrb.com/" version="4.3.2">Jekyll</generator>
+  <link
+    href="https://bojieyang.github.io/feed.xml"
+    rel="self"
+    type="application/atom+xml"
+  />
+  <link href="https://bojieyang.github.io/" rel="alternate" type="text/html" />
+  <updated>2023-03-23T09:42:52+08:00</updated>
+  <id>https://bojieyang.github.io/feed.xml</id>
+  <title type="html">JieTalk</title>
+  <subtitle>A personal blog about Wealth, Happiness and Preferences</subtitle>
+  <author>
+  <name>bojieyang</name></author>
+  <entry><title type="html">几个让我保持身材的生活习惯</title><link
+      href="https://bojieyang.github.io/posts/a-few-life-hacks-keep-me-slim/"
+      rel="alternate"
+      type="text/html"
+      title="几个让我保持身材的生活习惯"
+    /><published>2023-03-20T00:00:00+08:00</published><updated
+    >2023-03-20T00:00:00+08:00</updated><id
+    >https://bojieyang.github.io/posts/a-few-life-hacks-keep-me-slim</id><author
+    ><name>bojieyang</name></author><category term="生活方式" /><category
+      term="健身"
+    /><category term="瘦身" /><category term="减脂" /><summary
+      type="html"
+    ><![CDATA[一个多月无刻意节食，我仍然瘦了 8 斤。]]></summary><media:thumbnail
+      xmlns:media="http://search.yahoo.com/mrss/"
+      url="https://bojieyang.github.io/assets/img/dist/a_few_life_hacks_keep_me_slim.webp"
+    /><media:content
+      medium="image"
+      url="https://bojieyang.github.io/assets/img/dist/a_few_life_hacks_keep_me_slim.webp"
+      xmlns:media="http://search.yahoo.com/mrss/"
+    /></entry>
+    </feed>
