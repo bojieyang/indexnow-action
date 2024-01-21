@@ -2,7 +2,8 @@ import {XMLParser} from 'fast-xml-parser';
 
 const parseOptions = {
   ignoreAttributes: false,
-  attributeNamePrefix: '@'
+  attributeNamePrefix: '@',
+  isArray: (tagName: string) => tagName === 'sitemap'
 };
 
 const XmlParser = {
