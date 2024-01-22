@@ -1,5 +1,3 @@
-import fetch from 'cross-fetch';
-import timeoutSignal from './timeout-signal';
 import {URLItem, URLSet} from './sitemap-handler';
 import {Options} from './inputs';
 
@@ -51,7 +49,7 @@ export default class SitemapSubmitter {
     const submitUrl = 'https://' + options.endpoint + '/indexnow';
     const submitOptions = {
       //signal: AbortSignal.timeout(options.timeout),
-      signal: timeoutSignal(options.timeout),
+      signal: AbortSignal.timeout(options.timeout),
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

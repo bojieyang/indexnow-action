@@ -1,5 +1,3 @@
-import fetch from 'cross-fetch';
-import timeoutSignal from './timeout-signal';
 import {verifyURLString} from './utils';
 export class InvalidURLError extends Error {
   constructor(message: string) {
@@ -34,7 +32,7 @@ export const SitemapFetcher = {
     try {
       const options = {
         //signal: AbortSignal.timeout(timeout)
-        signal: timeoutSignal(timeout)
+        signal: AbortSignal.timeout(timeout)
       };
       const response = await fetch(url.href, options);
       const body = await response.text();
