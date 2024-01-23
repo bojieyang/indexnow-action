@@ -12,11 +12,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Upgrade Nodejs version to v20.
-- Use native fetch API instead of cross-fetch.
+- Use native fetch API instead of cross-fetch. 
 
 ### Fixed
 
 -  Fixed the issue that cannot parse sitemapindex with only one sitemap #136 by @TheJiahao.
+
+### Security
+
+- Added instructions for dynamic deploy IndexNow key file to prevent them from being leaked in public repositories. #71 by @Young-Lord. 
 
 ## [1.1.2] - 2023-06-25
 
