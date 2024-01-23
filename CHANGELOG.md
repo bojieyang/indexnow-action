@@ -7,6 +7,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.0] - 2024-01-22
+
+### Changed
+
+- Upgrade Nodejs version to v20.
+- Use native fetch API instead of cross-fetch.
+
+### Fixed
+
+-  Fixed the issue that cannot parse sitemapindex with only one sitemap #136 by @TheJiahao.
+
 ## [1.1.2] - 2023-06-25
 
 ### Security
