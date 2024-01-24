@@ -24,7 +24,7 @@ The key file has been obtained from IndexNow and added to your website.
 If you don't know how to get the key file, see [IndexNow Document](https://www.indexnow.org/documentation).
 
 > [!TIP]
-> If your website is stored in a public repository (such as GitHub Pages), saving the Key file directly in the repository will reveal the content and location of this file, which may be a potential security risk. If you want to avoid this, use a solution that dynamically generates key files at deployment time. Please refer to ```[this section](#generate-Indexnow-key-file-during-deployment)```.
+> If your website is stored in a public repository (such as GitHub Pages), saving the Key file directly in the repository will reveal the content and location of this file, which may be a potential security risk. If you want to avoid this, use a solution that dynamically generates key files at deployment time. Please refer to [Generate IndexNow Key file during deployment](#generate-indexnow-key-file-during-deployment) section.
 
 ### **Basic**
 
