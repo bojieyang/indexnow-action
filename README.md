@@ -23,11 +23,14 @@ The key file has been obtained from IndexNow and added to your website.
 
 If you don't know how to get the key file, see [IndexNow Document](https://www.indexnow.org/documentation).
 
+> [!TIP]
+> If your website is stored in a public repository (such as GitHub Pages), saving the Key file directly in the repository will reveal the content and location of this file, which may be a potential security risk. If you want to avoid this, use a solution that dynamically generates key files at deployment time. Please refer to ```[this section](#generate-Indexnow-key-file-during-deployment)```.
+
 ### **Basic**
 
 ```yaml
 steps:
-  - uses: bojieyang/indexnow-action@v1 # v1 is the latest major version following the action-versioning.
+  - uses: bojieyang/indexnow-action@v2 # v2 is the latest major version following the action-versioning.
     with:
     # The location of your sitemap must start with http(s). 
     # Currently, XML Sitemap, Sitemap index, RSS and Atom formats are supported.
@@ -51,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: indexnow-action
-        uses: bojieyang/indexnow-action@v1
+        uses: bojieyang/indexnow-action@v2
         with:
           sitemap-location: 'https://bojieyang.github.io/sitemap.xml'
           key: ${{ secrets.INDEXNOW_KEY }}
@@ -112,6 +115,34 @@ View code from [here](https://github.com/bojieyang/bojieyang.github.io/blob/mast
 - [x] Sitemap Index
 - [x] RSS 2.0
 - [x] Atom 1.0
+
+## Generate IndexNow Key file during deployment
+
+Dynamically generating the key file during deployment can avoid the problem of leakage caused by storing the key file in a public repository. Different platforms have their own solutions for dynamically generating files during the deployment process. Here we take GitHub Pages as an example to introduce the corresponding solution.
+
+The specific steps of deploying the plan are as follows:
+1. Store the contents of IndexNow’s key through GitHub Secrets.
+2. Deploy the website through GitHub Action.
+3. Add the following content to the deployment configuration corresponding to Action:
+
+```yaml
+ jobs:
+   build:
+     steps: 
+      ### ... omit other steps
+      - name: Setup IndexNow 
+      # Generate files dynamically to prevent them from being leaked in public repositories.
+      # This example will put the file in the root directory of the site.You may change the location by yourself.
+        run: echo ${{ secrets.INDEXNOW_KEY }} > ${{ secrets.INDEXNOW_KEY }}.txt
+      ### ... omit other steps
+```
+For complete deployment files, see [here](https://github.com/bojieyang/bojieyang.github.io/blob/master/.github/workflows/jekyll.yml)。
+
+## About Versions
+
+The v2 is the current maintenance version and is based on Node.js v20. It is recommended to use the V2 version whenever possible.
+
+The v1 version is a legacy version and is based on Node.js v16. This version can be used when the Node.js v20 version is not available.
 
 ## Maintainers
 

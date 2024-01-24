@@ -22,11 +22,13 @@
 已经从 IndexNow 获取了 Key 文件并添加到了你的网站上。
 如果你不知道如何获取 Key 文件，请看[IndexNow 文档](https://www.indexnow.org/documentation)。
 
-### **基本使用**
+> [!TIP]
+> 如果你的网站是存放在公开仓库 (例如 GitHub Pages)，将 Key 文件直接保存在仓库中会泄露此文件的内容和位置，可能存在潜在的安全风险。如果你想避免这种情况，请使用在部署时生成 key 文件的方案。请参考`在部署时生成 IndexNow Key 文件`一节。
 
+### **基本使用**
 ```yaml
 steps:
-  - uses: bojieyang/indexnow-action@v1 # v1 is the latest major version following the action-versioning.
+  - uses: bojieyang/indexnow-action@v2 # v2 is the latest major version following the action-versioning.
     with:
     # The location of your sitemap must start with http(s). 
     # Currently, XML Sitemap, Sitemap index, RSS and Atom formats are supported.
@@ -50,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: indexnow-action
-        uses: bojieyang/indexnow-action@v1
+        uses: bojieyang/indexnow-action@v2
         with:
           sitemap-location: 'https://bojieyang.github.io/sitemap.xml'
           key: ${{ secrets.INDEXNOW_KEY }}
@@ -112,13 +114,40 @@ jobs:
 - [x] Sitemap Index
 - [x] RSS 2.0
 - [x] Atom 1.0
+
+## 在部署时生成 IndexNow Key 文件
+在部署时动态生成 key 文件，可以避免将 key 文件存放在公开仓库中导致泄露的问题。不同的平台有各自的在部署流程中动态生成文件的方案。这里以 GitHub Pages 为例，介绍对应的解决方案。
+
+部署方案具体步骤如下：
+1. 通过 GitHub Secrets 存储 IndexNow 的 key 的内容。
+2. 通过 GitHub Action 部署网站。
+3. 在对应 Action 的部署配置中加入一下内容：
+```yaml
+ jobs:
+   build:
+     steps: 
+      ### ... 省略其他步骤
+      - name: Setup IndexNow 
+      # Generate files dynamically to prevent them from being leaked in public repositories.
+      # This example will put the file in the root directory of the site.You may change the location by yourself.
+        run: echo ${{ secrets.INDEXNOW_KEY }} > ${{ secrets.INDEXNOW_KEY }}.txt
+      ### ... 省略其他步骤
+```
+完整部署文件详见[这里](https://github.com/bojieyang/bojieyang.github.io/blob/master/.github/workflows/jekyll.yml)。
+
+## 版本说明
+
+v2 是当前维护版本，基于 Node.js v20。建议在可能的情况下尽量使用 V2 版本。
+
+v1 版本为遗留版本，基于 Node.js v16。当无法使用 Node.js v20 版本时，可以使用此版本。
+
 ## 维护者
 
 [@bojieyang](https://github.com/bojieyang)
 
 ## 致谢
 
-使用 [lquixada/cross-fetch](https://github.com/lquixada/cross-fetch) 在 Nodejs v16 版本中兼容 WHATWG Fetch API。 
+使用 [lquixada/cross-fetch](https://github.com/lquixada/cross-fetch) 在 Nodejs v16 版本中兼容 WHATWG Fetch API。
 
 使用 [@NaturalIntelligence/fast-xml-parser](https://github.com/NaturalIntelligence/fast-xml-parser) 解析 XML。
 
