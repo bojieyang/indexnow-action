@@ -36,7 +36,7 @@
     "fast-xml-parser": "^4.3.3"
   },
   "devDependencies": {
-    "@prettier/plugin-xml": "^3.3.1",
+    "@prettier/plugin-xml": "^3.4.1",
     "@types/node": "^20.12.2",
     "@types/semver": "^7.5.8",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
