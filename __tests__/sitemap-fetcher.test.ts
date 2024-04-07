@@ -24,13 +24,7 @@ describe('sitemap-fetcher test cases', () => {
       SitemapFetcher.fetch('https://example.com:demo', 5000)
     ).rejects.toBeInstanceOf(InvalidURLError);
   });
-  /*
-  test('invalid url that can pass verify but can not fetched should throw InvalidURLError', async () => {
-    await expect(
-      SitemapFetcher.fetch('https://example/', 5000)
-    ).rejects.toBeInstanceOf(FetchError);
-  },10000);
-*/
+
   test('fetch timeout should throw TimeoutError', async () => {
     await expect(
       SitemapFetcher.fetch('https://httpbin.org/xml', 1)
