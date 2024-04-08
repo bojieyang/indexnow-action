@@ -37,7 +37,7 @@
   },
   "devDependencies": {
     "@prettier/plugin-xml": "^3.4.1",
-    "@types/node": "^20.12.2",
+    "@types/node": "^20.12.5",
     "@types/semver": "^7.5.8",
     "@typescript-eslint/eslint-plugin": "^7.0.0",
     "@typescript-eslint/parser": "^6.20.0",
