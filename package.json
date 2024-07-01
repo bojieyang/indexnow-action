@@ -38,7 +38,7 @@
   "devDependencies": {
     "@eslint/js": "^9.5.0",
     "@prettier/plugin-xml": "^3.4.1",
-    "@types/node": "^20.14.8",
+    "@types/node": "^20.14.9",
     "@types/semver": "^7.5.8",
     "@vercel/ncc": "^0.38.1",
     "dotenv": "^16.4.5",
