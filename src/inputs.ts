@@ -23,6 +23,7 @@ export interface Options {
   limit: number;
   timeout: number;
   failureStrategy: FailureStrategy;
+  lastmodRequired: boolean;
 }
 
 export class InvalidInputError extends Error {
@@ -42,6 +43,7 @@ export function parseInputs(): Options {
   const limit = parseLimitInput();
   const timeout = parseTimeoutInput();
   const failureStrategy = parseFailureStrategyInput();
+  const lastmodRequired = parseLastmodRequiredInput();
 
   const options: Options = {
     sitemapLocation: sitemapLocation,
@@ -52,7 +54,8 @@ export function parseInputs(): Options {
     endpoint: endpoint,
     limit: limit,
     timeout: timeout,
-    failureStrategy: failureStrategy
+    failureStrategy: failureStrategy,
+    lastmodRequired: lastmodRequired
   };
 
   return options;
@@ -162,6 +165,11 @@ export function parseFailureStrategyInput(): FailureStrategy {
   throw new InvalidInputError(
     `failure-strategy with the value ${failureStrategyInput} is not available.`
   );
+}
+
+export function parseLastmodRequiredInput(): boolean {
+  const lastmodRequiredInput = core.getBooleanInput('lastmod-required');
+  return lastmodRequiredInput;
 }
 
 export function isFailureStrategy(

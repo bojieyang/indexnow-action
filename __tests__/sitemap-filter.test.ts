@@ -32,7 +32,7 @@ describe('FilterChain test cases', () => {
       }
     ];
     const chain = new FilterChain();
-    chain.addFilter(new SinceFilter(4, 'day'));
+    chain.addFilter(new SinceFilter(4, 'day', true));
     chain.addFilter(new LimitFilter(3));
     const result = chain.doFilter(origin);
 

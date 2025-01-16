@@ -48,7 +48,11 @@ export default class SitemapProcessor {
     this.registerHandler(new AtomHandler(this));
 
     this.filterChain.addFilter(
-      new SinceFilter(this.options.since, this.options.sinceUnit)
+      new SinceFilter(
+        this.options.since,
+        this.options.sinceUnit,
+        this.options.lastmodRequired
+      )
     );
     this.filterChain.addFilter(new LimitFilter(this.options.limit));
   }

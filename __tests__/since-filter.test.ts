@@ -28,7 +28,7 @@ describe('since-filter test cases', () => {
         lastmod: dayjs().subtract(1, 'week').toDate()
       }
     ];
-    const filter = new SinceFilter(3, 'day'); // last 3 days
+    const filter = new SinceFilter(3, 'day', true); // last 3 days
     const result = filter.filter(data);
     expect(result.length).toStrictEqual(3);
     expect(result[0].loc.href).toStrictEqual('https://example.com/1.xml');
@@ -50,13 +50,13 @@ describe('since-filter test cases', () => {
         lastmod: dayjs().subtract(2, 'day').toDate()
       }
     ];
-    const filter = new SinceFilter(1, 'day'); // last 1 day
+    const filter = new SinceFilter(1, 'day', true); // last 1 day
     const result = filter.filter(data);
     expect(result.length).toStrictEqual(1);
     expect(result[0].loc.href).toStrictEqual('https://example.com/2.xml');
   });
 
-  test('items without lastmod property should not excluded when lastmodFieldMandatory set to false', () => {
+  test('items without lastmod property should not excluded when lastmodRequired set to false', () => {
     const data = [
       {
         loc: new URL('https://example.com/1.xml')

@@ -17,7 +17,8 @@ describe('sitemap-submitter test cases', () => {
       endpoint: 'www.bing.com',
       limit: 100,
       timeout: 10000,
-      failureStrategy: 'error'
+      failureStrategy: 'error',
+      lastmodRequired: true
     };
 
     const submitResponse = await sitemapSubmitter.submit(sitemaps, options);
@@ -46,7 +47,8 @@ describe('sitemap-submitter test cases', () => {
       endpoint: 'www.bing.com',
       limit: 100,
       timeout: 10000,
-      failureStrategy: 'error'
+      failureStrategy: 'error',
+      lastmodRequired: true
     };
 
     const submitResponse = await sitemapSubmitter.submit(sitemaps, options);
@@ -80,7 +82,8 @@ describe('sitemap-submitter test cases', () => {
       endpoint: 'www.bing.com',
       limit: 100,
       timeout: 10000,
-      failureStrategy: 'error'
+      failureStrategy: 'error',
+      lastmodRequired: true
     };
 
     const submitResponse = await sitemapSubmitter.submit(sitemaps, options);

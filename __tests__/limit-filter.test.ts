@@ -54,5 +54,6 @@ describe('LimitFilter test cases', () => {
     expect(result[0].loc.href).toStrictEqual('https://example.com/1.xml');
     expect(result[1].loc.href).toStrictEqual('https://example.com/2.xml');
     expect(result[2].loc.href).toStrictEqual('https://example.com/3.xml');
+    expect(result[3].loc.href).toStrictEqual('https://example.com/5.xml');
   });
 });

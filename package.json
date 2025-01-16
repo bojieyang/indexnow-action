@@ -1,6 +1,6 @@
 {
   "name": "indexnow-action",
-  "version": "1.1.2",
+  "version": "2.1.0",
   "description": "Automatically submit URLs through the IndexNow protocol.",
   "main": "index.js",
   "engines": {

@@ -5696,6 +5696,7 @@ exports.isEndpoint = isEndpoint;
 exports.parseLimitInput = parseLimitInput;
 exports.parseTimeoutInput = parseTimeoutInput;
 exports.parseFailureStrategyInput = parseFailureStrategyInput;
+exports.parseLastmodRequiredInput = parseLastmodRequiredInput;
 exports.isFailureStrategy = isFailureStrategy;
 const core = __importStar(__nccwpck_require__(7484));
 const utils_1 = __nccwpck_require__(1798);
@@ -5718,6 +5719,7 @@ function parseInputs() {
     const limit = parseLimitInput();
     const timeout = parseTimeoutInput();
     const failureStrategy = parseFailureStrategyInput();
+    const lastmodRequired = parseLastmodRequiredInput();
     const options = {
         sitemapLocation: sitemapLocation,
         key: key,
@@ -5727,7 +5729,8 @@ function parseInputs() {
         endpoint: endpoint,
         limit: limit,
         timeout: timeout,
-        failureStrategy: failureStrategy
+        failureStrategy: failureStrategy,
+        lastmodRequired: lastmodRequired
     };
     return options;
 }
@@ -5806,6 +5809,10 @@ function parseFailureStrategyInput() {
         return failureStrategyInput;
     }
     throw new InvalidInputError(`failure-strategy with the value ${failureStrategyInput} is not available.`);
+}
+function parseLastmodRequiredInput() {
+    const lastmodRequiredInput = core.getBooleanInput('lastmod-required');
+    return lastmodRequiredInput;
 }
 function isFailureStrategy(failureStrategy) {
     return failureStrategy === 'error' || failureStrategy === 'ignore';
@@ -5953,16 +5960,16 @@ const dayjs_1 = __importDefault(__nccwpck_require__(3706));
 class SinceFilter {
     since;
     sinceUnit;
-    lastmodFieldMandatory;
-    constructor(since, sinceUnit, lastmodFieldMandatory = true) {
+    lastmodRequired;
+    constructor(since, sinceUnit, lastmodRequired) {
         this.since = since;
         this.sinceUnit = sinceUnit;
-        this.lastmodFieldMandatory = lastmodFieldMandatory;
+        this.lastmodRequired = lastmodRequired;
     }
     filter(urls) {
         const sinced = (0, dayjs_1.default)().subtract(this.since, this.sinceUnit);
         return urls.filter(item => {
-            return this.lastmodFieldMandatory
+            return this.lastmodRequired
                 ? item.lastmod && sinced.isBefore(item.lastmod)
                 : item.lastmod === undefined || sinced.isBefore(item.lastmod);
         });
@@ -6156,7 +6163,7 @@ class SitemapProcessor {
         this.registerHandler(new sitemapindex_handler_1.default(this));
         this.registerHandler(new rss_handler_1.default(this));
         this.registerHandler(new atom_handler_1.default(this));
-        this.filterChain.addFilter(new since_filter_1.default(this.options.since, this.options.sinceUnit));
+        this.filterChain.addFilter(new since_filter_1.default(this.options.since, this.options.sinceUnit, this.options.lastmodRequired));
         this.filterChain.addFilter(new limit_filter_1.default(this.options.limit));
     }
     async fetchSitemapAndFilter() {

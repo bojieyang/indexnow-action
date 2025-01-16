@@ -18,7 +18,8 @@ jest.spyOn(Inputs, 'parseInputs').mockImplementation(() => {
     endpoint: 'www.bing.com',
     limit: 100,
     timeout: 10000,
-    failureStrategy: 'error'
+    failureStrategy: 'error',
+    lastmodRequired: true
   };
 });
 
@@ -42,7 +43,8 @@ describe('sitemap-processor test cases', () => {
         endpoint: 'www.bing.com',
         limit: 100,
         timeout: 10000,
-        failureStrategy: 'error'
+        failureStrategy: 'error',
+        lastmodRequired: true
       };
     });
     const sitemapProcessor = new SitemapProcessor();
@@ -151,7 +153,8 @@ describe('sitemap-processor test cases', () => {
         endpoint: 'www.bing.com',
         limit: 100,
         timeout: 10000,
-        failureStrategy: 'ignore'
+        failureStrategy: 'ignore',
+        lastmodRequired: true
       };
     });
     const sitemapProcessor = new SitemapProcessor();
@@ -174,7 +177,8 @@ describe('sitemap-processor test cases', () => {
         endpoint: 'www.bing.com',
         limit: 100,
         timeout: 10000,
-        failureStrategy: 'ignore'
+        failureStrategy: 'ignore',
+        lastmodRequired: true
       };
     });
     const sitemapProcessor = new SitemapProcessor();

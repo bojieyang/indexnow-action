@@ -50,7 +50,7 @@ inputs:
     description: 'Set the fetch timeout in milliseconds. The default value is 10000.'
     required: false
     default: '10000'
-  failure-strategy: #
+  failure-strategy:
     description: |
       Define the strategy  when submit failed. Available strategy are ignore and error. 
       For 'ignore', will outputting an notice only. 
@@ -58,6 +58,16 @@ inputs:
       The Default value is ignore.
     required: false
     default: 'ignore'
+  lastmod-required: 
+    description: |
+      If set to false, url entry without a `lastmod` tag in sitemap may be submitted, as long as the other conditions are met.
+      If set to true, url entry without a `lastmod` tag in sitemap will be excluded. This is the default behavior and can not be configured before.
+      However, there are some scenarios where the sitemap does not have a `lastmod` tag and it is difficult to set this tag, 
+      but they still want these URLs to be submitted.
+      This option is added to be compatible with this scenario.
+      since version 2.1.
+    required: false
+    default: 'true'
 runs:
   using: 'node20'
   main: 'dist/index.js'
