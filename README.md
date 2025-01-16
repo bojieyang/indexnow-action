@@ -109,6 +109,11 @@ View code from [here](https://github.com/bojieyang/bojieyang.github.io/blob/mast
   For `ignore`, will outputting an notice only.
   For `error`, outputting an error message also sets the status of action to fail. The default value is `ignore`.
 
+- lastmod-required
+  `optional`.
+  Define the behavior when `lastmod` tag is not present in sitemap. Available value are `true` and `false`.
+  For `true`, a url entry without `lastmod` tag will be exclude.
+  For `false`, a url entry without a `lastmod` tag in sitemap may be submitted, as long as the other conditions are met. The default value is `true` for backward compatibility.
 
 ## Supported sitemap formats
 - [x] XML Sitemap

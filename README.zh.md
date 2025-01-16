@@ -108,6 +108,12 @@ jobs:
   设置为 `ignore`, 表示仅输出提醒信息。
   设置为 `error`, 表示输出错误信息的同时会将 Action Status 设置为失败。默认值为`ignore`。
 
+- lastmod-required
+  `可选`.
+  设置 sitemap 中 `lastmod` 标签不存在时的处理行为。有效值为`true`和 `false`。
+  设置为 `true`，sitemap 中的 url 项如果没有 `lastmod` 标签，则其将会被排除。
+  设置为 `false`, sitemap 中 的 url 项 如果没有 `lastmod` 标签，其仍可被提交，只要其满足其他条件。默认值是 `true`。
+
 ## 支持的格式
 
 - [x] XML Sitemap

@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [2.1.0] - 2025-01-16
+
+### Changed
+- Add a `lastmod-required` option to control the behavior when a url entry in sitemap does not have `lastmod` tag.
+
 ## [2.0] - 2024-01-22
 
 ### Changed
