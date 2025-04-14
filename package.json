@@ -41,7 +41,7 @@
     "@types/node": "^22.10.2",
     "@types/semver": "^7.5.8",
     "@vercel/ncc": "^0.38.3",
-    "dotenv": "^16.4.5",
+    "dotenv": "^16.5.0",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-jest": "^28.8.3",
