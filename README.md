@@ -30,7 +30,7 @@ If you don't know how to get the key file, see [IndexNow Document](https://www.i
 
 ```yaml
 steps:
-  - uses: bojieyang/indexnow-action@v2 # v2 is the latest major version following the action-versioning.
+  - uses: bojieyang/indexnow-action@v3 # v3 is the latest major version following the action-versioning.
     with:
     # The location of your sitemap must start with http(s). 
     # Currently, XML Sitemap, Sitemap index, RSS and Atom formats are supported.
@@ -54,7 +54,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: indexnow-action
-        uses: bojieyang/indexnow-action@v2
+        uses: bojieyang/indexnow-action@v3
         with:
           sitemap-location: 'https://bojieyang.github.io/sitemap.xml'
           key: ${{ secrets.INDEXNOW_KEY }}
@@ -145,7 +145,9 @@ For complete deployment files, see [here](https://github.com/bojieyang/bojieyang
 
 ## About Versions
 
-The v2 is the current maintenance version and is based on Node.js v20. It is recommended to use the V2 version whenever possible.
+The v3 is the current maintenance version and is based on Node.js v24. It is recommended to use this version whenever possible.
+
+The v2 is a legacy version and is based on Node.js v20. This version can be used when the Node.js v24 version is not available.
 
 The v1 version is a legacy version and is based on Node.js v16. This version can be used when the Node.js v20 version is not available.
 

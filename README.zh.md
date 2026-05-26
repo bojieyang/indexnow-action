@@ -28,7 +28,7 @@
 ### **基本使用**
 ```yaml
 steps:
-  - uses: bojieyang/indexnow-action@v2 # v2 is the latest major version following the action-versioning.
+  - uses: bojieyang/indexnow-action@v3 # v3 is the latest major version following the action-versioning.
     with:
     # The location of your sitemap must start with http(s). 
     # Currently, XML Sitemap, Sitemap index, RSS and Atom formats are supported.
@@ -52,7 +52,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: indexnow-action
-        uses: bojieyang/indexnow-action@v2
+        uses: bojieyang/indexnow-action@v3
         with:
           sitemap-location: 'https://bojieyang.github.io/sitemap.xml'
           key: ${{ secrets.INDEXNOW_KEY }}
@@ -142,8 +142,9 @@ jobs:
 完整部署文件详见[这里](https://github.com/bojieyang/bojieyang.github.io/blob/master/.github/workflows/jekyll.yml)。
 
 ## 版本说明
+v3 是当前维护版本，基于 Node.js v24。建议在可能的情况下尽量使用此版本。
 
-v2 是当前维护版本，基于 Node.js v20。建议在可能的情况下尽量使用 V2 版本。
+v2 为遗留版本，基于 Node.js v20。当无法使用 Node.js v24 版本时，可以使用此版本。
 
 v1 版本为遗留版本，基于 Node.js v16。当无法使用 Node.js v20 版本时，可以使用此版本。
 
