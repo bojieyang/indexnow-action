@@ -10,8 +10,14 @@ const alwaysArray = [
 const parseOptions = {
   ignoreAttributes: false,
   attributeNamePrefix: '@',
-  isArray: (name: string, jpath: string) => {
-    if (alwaysArray.indexOf(jpath) !== -1) {
+
+  isArray: (
+    _tagName: string,
+    jPathOrMatcher: any,
+    _isLeafNode: boolean,
+    _isAttribute: boolean
+  ) => {
+    if (alwaysArray.indexOf(jPathOrMatcher) !== -1) {
       return true;
     } else {
       return false;

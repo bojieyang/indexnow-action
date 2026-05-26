@@ -19,6 +19,14 @@ module.exports = {
         'ts-ignore': 'allow-with-description'
       }
     ],
+    '@typescript-eslint/no-unused-vars': [
+      'error',
+      { 
+        'argsIgnorePattern': '^_',
+        'varsIgnorePattern': '^_',
+        'caughtErrorsIgnorePattern': '^_'
+      }
+    ],
     'no-console': 'error',
     yoda: 'error',
     'prefer-const': [
