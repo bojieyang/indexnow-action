@@ -39,7 +39,7 @@
     "@eslint/eslintrc": "^3.3.5",
     "@eslint/js": "^10.0.1",
     "@prettier/plugin-xml": "^3.4.1",
-    "@types/node": "^22.10.2",
+    "@types/node": "^25.9.1",
     "@types/semver": "^7.5.8",
     "@vercel/ncc": "^0.38.4",
     "dotenv": "^16.5.0",
